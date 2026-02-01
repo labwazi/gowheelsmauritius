@@ -45,7 +45,7 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: var(--text-primary);
             line-height: 1.6;
@@ -501,6 +501,7 @@
             overflow: hidden;
             border: 1px solid var(--border);
             transition: all 0.3s ease;
+            position: relative;
         }
 
         .car-card:hover {
@@ -665,6 +666,23 @@
 
         .per-day {
             font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* ===== CAR SPECS ===== */
+        .car-specs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 15px 0;
+        }
+
+        .car-specs .spec {
+            background: var(--glass);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid var(--border);
             color: var(--text-secondary);
         }
 
@@ -1313,18 +1331,17 @@
                     features: ["Automatic", "5 Seats", "Touchscreen", "Fuel Efficient"],
                     images: [
                         "images/naz3.jpg",
-                        "httpimages/naz4.jpg"
+                        "images/naz4.jpg"
                     ],
                     availability: "available",
                     popular: true,
-                    blockedDates: [{ "from": "2026-02-01", "to": "2026-02-04"" }
-  ] // Only blocked until Feb 2
+                    blockedDates: [{ "from": "2026-02-01", "to": "2026-02-04" }] // Only blocked until Feb 2
                 },
                 {
                     id: "swift2025",
                     name: "Suzuki Swift",
                     year: "2025",
-                    dailyRate: 1400,
+                    dailyRate: 1300,
                     features: ["2025 Model", "Automatic", "5 Seats", "Premium Sound"],
                     images: [
                         "images/naz1.jpg",
@@ -1338,7 +1355,7 @@
                     id: "vitz2019",
                     name: "Toyota Vitz",
                     year: "2019",
-                    dailyRate: 1200,
+                    dailyRate: 1300,
                     features: ["Automatic", "5 Seats", "Fuel Efficient", "Blue Color"],
                     images: [
                         "images/naz7.jpg",
@@ -1352,7 +1369,7 @@
                     id: "ak132021",
                     name: "AK13",
                     year: "2021",
-                    dailyRate: 1250,
+                    dailyRate: 1300,
                     features: ["Automatic", "5 Seats", "Modern Design", "Grey Color"],
                     images: [
                         "images/naz9.jpg",
@@ -1364,7 +1381,7 @@
                 },
                 {
                     id: "cruiser2019",
-                    name: "Toyota Cruiser",
+                    name: "Urban Cruiser",
                     year: "2019",
                     dailyRate: 2000,
                     features: ["SUV", "7 Seats", "Powerful", "Spacious"],
@@ -1398,15 +1415,6 @@
             
             // Initialize fleet
             initializeFleet();
-            
-            // Setup flatpickr for current date
-            flatpickr(".date-input input", {
-                minDate: "today",
-                dateFormat: "Y-m-d",
-                onChange: function() {
-                    // This will be overridden for each car individually
-                }
-            });
         });
 
         // ===== FLEET MANAGEMENT =====
@@ -1605,7 +1613,7 @@
                 
                 // Initialize date picker if car is available
                 if (car.availability === 'available') {
-                    initializeDatePicker(car);
+                    setTimeout(() => initializeDatePicker(car), 100);
                 }
             });
         }
@@ -1654,30 +1662,37 @@
             }
             
             // Pick-up date picker
-            flatpickr(`#${car.id}-pickup`, {
-                minDate: minDate,
-                dateFormat: "Y-m-d",
-                disable: car.blockedDates,
-                onChange: function(selectedDates) {
-                    const returnPicker = document.querySelector(`#${car.id}-return`)._flatpickr;
-                    if (selectedDates[0]) {
-                        const nextDay = new Date(selectedDates[0]);
-                        nextDay.setDate(nextDay.getDate() + 1);
-                        returnPicker.set('minDate', nextDay);
+            const pickupInput = document.getElementById(`${car.id}-pickup`);
+            if (pickupInput) {
+                flatpickr(pickupInput, {
+                    minDate: minDate,
+                    dateFormat: "Y-m-d",
+                    disable: car.blockedDates,
+                    onChange: function(selectedDates) {
+                        const returnInput = document.getElementById(`${car.id}-return`);
+                        const returnPicker = returnInput._flatpickr;
+                        if (selectedDates[0] && returnPicker) {
+                            const nextDay = new Date(selectedDates[0]);
+                            nextDay.setDate(nextDay.getDate() + 1);
+                            returnPicker.set('minDate', nextDay);
+                        }
+                        calculatePrice(car.id);
                     }
-                    calculatePrice(car.id);
-                }
-            });
+                });
+            }
 
             // Return date picker
-            flatpickr(`#${car.id}-return`, {
-                minDate: minDate,
-                dateFormat: "Y-m-d",
-                disable: car.blockedDates,
-                onChange: function() {
-                    calculatePrice(car.id);
-                }
-            });
+            const returnInput = document.getElementById(`${car.id}-return`);
+            if (returnInput) {
+                flatpickr(returnInput, {
+                    minDate: minDate,
+                    dateFormat: "Y-m-d",
+                    disable: car.blockedDates,
+                    onChange: function() {
+                        calculatePrice(car.id);
+                    }
+                });
+            }
         }
 
         // ===== PROMO CODE FUNCTIONS =====
@@ -1713,11 +1728,17 @@
             const car = fleetState.cars.find(c => c.id === carId);
             if (!car || car.availability !== 'available') return;
 
-            const pickup = document.getElementById(`${carId}-pickup`).value;
-            const ret = document.getElementById(`${carId}-return`).value;
+            const pickupInput = document.getElementById(`${carId}-pickup`);
+            const returnInput = document.getElementById(`${carId}-return`);
+            
+            if (!pickupInput || !returnInput) return;
+            
+            const pickup = pickupInput.value;
+            const ret = returnInput.value;
             
             if (!pickup || !ret) {
-                document.getElementById(`calculator-${carId}`).classList.remove('visible');
+                const calculator = document.getElementById(`calculator-${carId}`);
+                if (calculator) calculator.classList.remove('visible');
                 return;
             }
 
@@ -1725,7 +1746,8 @@
             const returnDate = new Date(ret);
             
             if (returnDate <= pickupDate) {
-                document.getElementById(`calculator-${carId}`).classList.remove('visible');
+                const calculator = document.getElementById(`calculator-${carId}`);
+                if (calculator) calculator.classList.remove('visible');
                 return;
             }
 
@@ -1753,34 +1775,43 @@
             }
 
             // Update UI
-            document.getElementById(`${carId}-days`).textContent = days;
-            document.getElementById(`${carId}-subtotal`).textContent = `${CONFIG.currency} ${subtotal.toLocaleString()}`;
-            
-            // Show/hide discount rows
+            const daysElement = document.getElementById(`${carId}-days`);
+            const subtotalElement = document.getElementById(`${carId}-subtotal`);
             const discountRow = document.getElementById(`${carId}-discount-row`);
             const discountValue = document.getElementById(`${carId}-discount`);
             const promoRow = document.getElementById(`${carId}-promo-row`);
             const promoDiscountValue = document.getElementById(`${carId}-promo-discount`);
+            const totalElement = document.getElementById(`${carId}-total`);
+            const calculator = document.getElementById(`calculator-${carId}`);
             
-            if (discountAmount > 0) {
-                discountRow.style.display = 'flex';
-                discountValue.textContent = `${CONFIG.currency} ${discountAmount.toLocaleString()}`;
-            } else {
-                discountRow.style.display = 'none';
+            if (daysElement) daysElement.textContent = days;
+            if (subtotalElement) subtotalElement.textContent = `${CONFIG.currency} ${subtotal.toLocaleString()}`;
+            
+            // Show/hide discount rows
+            if (discountRow && discountValue) {
+                if (discountAmount > 0) {
+                    discountRow.style.display = 'flex';
+                    discountValue.textContent = `${CONFIG.currency} ${discountAmount.toLocaleString()}`;
+                } else {
+                    discountRow.style.display = 'none';
+                }
             }
             
-            if (promoDiscount > 0) {
-                promoRow.style.display = 'flex';
-                promoDiscountValue.textContent = `${CONFIG.currency} ${promoDiscount.toLocaleString()}`;
-            } else {
-                promoRow.style.display = 'none';
+            if (promoRow && promoDiscountValue) {
+                if (promoDiscount > 0) {
+                    promoRow.style.display = 'flex';
+                    promoDiscountValue.textContent = `${CONFIG.currency} ${promoDiscount.toLocaleString()}`;
+                } else {
+                    promoRow.style.display = 'none';
+                }
             }
             
-            document.getElementById(`${carId}-total`).textContent = `${CONFIG.currency} ${total.toLocaleString()}`;
+            if (totalElement) totalElement.textContent = `${CONFIG.currency} ${total.toLocaleString()}`;
             
             // Show calculator
-            const calculator = document.getElementById(`calculator-${carId}`);
-            calculator.classList.add('visible');
+            if (calculator) {
+                calculator.classList.add('visible');
+            }
             
             return { car, days, total, pickup, ret, discountPercent, discountAmount, promoDiscount };
         }
@@ -1826,7 +1857,7 @@
             
             const status = car.availability === 'available' ? 'available for booking' : 'currently booked';
             
-            const message = `🚗 *${CONFIG.companyName}*\n\n`;
+            let message = `🚗 *${CONFIG.companyName}*\n\n`;
             message += `I'm interested in the ${car.name} ${car.year} (${status}).\n`;
             message += `Please provide availability and pricing details.`;
             
@@ -1839,6 +1870,8 @@
         // ===== ADMIN PANEL FUNCTIONS =====
         function renderAdminPanel() {
             const grid = document.getElementById('adminGrid');
+            if (!grid) return;
+            
             grid.innerHTML = '';
             
             fleetState.cars.forEach((car) => {
@@ -1869,24 +1902,32 @@
             const checkbox = document.getElementById(`toggle-${carId}`);
             const car = fleetState.cars.find(c => c.id === carId);
             
-            if (car) {
+            if (car && checkbox) {
                 car.availability = checkbox.checked ? 'available' : 'booked';
                 saveFleetState();
             }
         }
 
         function openAdminPanel() {
-            document.getElementById('adminOverlay').style.display = 'flex';
+            const overlay = document.getElementById('adminOverlay');
+            if (overlay) {
+                overlay.style.display = 'flex';
+            }
             showToast("Admin panel opened", "info");
         }
 
         function closeAdminPanel() {
-            document.getElementById('adminOverlay').style.display = 'none';
+            const overlay = document.getElementById('adminOverlay');
+            if (overlay) {
+                overlay.style.display = 'none';
+            }
         }
 
         // ===== TOAST NOTIFICATION =====
         function showToast(message, type = 'info') {
             const container = document.getElementById('toastContainer');
+            if (!container) return;
+            
             const toast = document.createElement('div');
             toast.className = `toast ${type}`;
             
@@ -1930,5 +1971,3 @@
     </script>
 </body>
 </html>
-
-
