@@ -413,35 +413,11 @@
             color: var(--success);
         }
 
-        .promo-section {
-            margin: 20px 0;
-            padding: 15px;
-            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(245, 158, 11, 0.05));
-            border-radius: 12px;
-            border: 1px solid rgba(245, 158, 11, 0.2);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .promo-section i {
-            color: var(--warning);
-            font-size: 1.2rem;
-        }
-
-        .promo-code {
-            background: rgba(245, 158, 11, 0.2);
-            padding: 5px 12px;
-            border-radius: 6px;
-            font-weight: 700;
-            color: var(--warning);
-            margin-left: 5px;
-            border: 1px dashed var(--warning);
-        }
+        /* REMOVED PROMO CODE VISIBLE SECTION */
 
         .calendar-section {
-            margin: 25px 0;
-            padding-top: 25px;
+            margin: 20px 0;
+            padding-top: 20px;
             border-top: 1px solid var(--border);
         }
 
@@ -736,28 +712,6 @@
                 align-items: stretch;
             }
         }
-
-        /* ===== LOADING ===== */
-        .loading {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 60px;
-        }
-
-        .loader {
-            width: 50px;
-            height: 50px;
-            border: 3px solid var(--tertiary);
-            border-top: 3px solid var(--accent);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
     </style>
 </head>
 <body>
@@ -828,8 +782,11 @@
 
             <div id="fleetContainer" class="car-grid">
                 <!-- Cars will load here automatically -->
-                <div class="loading" id="loadingIndicator">
-                    <div class="loader"></div>
+                <div class="loading" id="loadingIndicator" style="text-align: center; padding: 40px; grid-column: 1/-1;">
+                    <div style="font-size: 2rem; color: var(--accent); margin-bottom: 20px;">
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </div>
+                    <p style="color: var(--text-secondary);">Loading fleet...</p>
                 </div>
             </div>
         </div>
@@ -887,6 +844,17 @@
     </footer>
 
     <script>
+        // ===== HIDDEN PROMO CODES SYSTEM =====
+        // Promo codes are hidden from customers but applied automatically
+        // You can change these codes anytime without affecting the display
+        
+        const hiddenPromoCodes = {
+            "WASSIM99": 5,  // Code: WASSIM99 gives 5% discount
+            "GO2024": 10,   // Code: GO2024 gives 10% discount
+            "LOYALTY5": 5,  // Code: LOYALTY5 gives 5% discount
+            "NEWYEAR": 15   // Code: NEWYEAR gives 15% discount
+        };
+
         // ===== CAR DATA =====
         const cars = [
             {
@@ -903,8 +871,7 @@
                 ],
                 discounts: [5, 10, 15],
                 popular: true,
-                promoCode: "WASSIM99",
-                promoDiscount: 5,
+                // Promo code removed from here - now managed separately
                 blockedDates: []
             },
             {
@@ -921,8 +888,6 @@
                 ],
                 discounts: [5, 10, 15],
                 popular: true,
-                promoCode: "WASSIM99",
-                promoDiscount: 5,
                 blockedDates: []
             },
             {
@@ -939,8 +904,6 @@
                 ],
                 discounts: [5, 10, 15],
                 popular: false,
-                promoCode: "WASSIM99",
-                promoDiscount: 5,
                 blockedDates: []
             },
             {
@@ -957,8 +920,6 @@
                 ],
                 discounts: [5, 10, 15],
                 popular: false,
-                promoCode: "WASSIM99",
-                promoDiscount: 5,
                 blockedDates: []
             },
             {
@@ -975,8 +936,6 @@
                 ],
                 discounts: [5, 10, 15],
                 popular: true,
-                promoCode: "WASSIM99",
-                promoDiscount: 5,
                 blockedDates: []
             },
             {
@@ -993,8 +952,6 @@
                 ],
                 discounts: [5, 7, 10],
                 popular: false,
-                promoCode: "WASSIM99",
-                promoDiscount: 5,
                 blockedDates: []
             },
             {
@@ -1011,8 +968,6 @@
                 ],
                 discounts: [5, 10, 15],
                 popular: true,
-                promoCode: "WASSIM99",
-                promoDiscount: 5,
                 blockedDates: []
             }
         ];
@@ -1113,18 +1068,7 @@
                     </div>
                 `;
                 
-                // Prepare promo HTML
-                const promoHTML = car.promoCode 
-                    ? `<div class="promo-section">
-                           <i class="fas fa-tag"></i>
-                           <div>
-                               <strong style="color: var(--text-primary);">Special Promo:</strong> Use code 
-                               <span class="promo-code">${car.promoCode}</span> for ${car.promoDiscount}% OFF
-                           </div>
-                       </div>`
-                    : '';
-                
-                // Card HTML structure
+                // Card HTML structure - NO PROMO CODE DISPLAYED
                 card.innerHTML = `
                     <div class="car-image">
                         <img src="${car.images[0]}" alt="${car.name} ${car.year}" 
@@ -1154,8 +1098,6 @@
                             </div>
                             ${discountHTML}
                         </div>
-                        
-                        ${promoHTML}
                         
                         ${car.status === 'available' ? `
                             <div class="calendar-section">
@@ -1332,19 +1274,39 @@
             
             const { car, days, total, pickup, returnDate, discount } = booking;
             
+            // Automatically apply best available promo code (hidden from customer)
+            let appliedPromoCode = "WASSIM99"; // Default promo code
+            let promoDiscount = 0;
+            
+            // Check which promo code to apply based on car or customer type
+            // This is where you can add logic to decide which promo to apply
+            if (days >= 7) {
+                appliedPromoCode = "LOYALTY5";
+                promoDiscount = Math.round(total * 5 / 100);
+            } else if (car.category.includes("popular")) {
+                appliedPromoCode = "WASSIM99";
+                promoDiscount = Math.round(total * 5 / 100);
+            } else {
+                appliedPromoCode = "WASSIM99";
+                promoDiscount = Math.round(total * 5 / 100);
+            }
+            
+            const finalTotal = total - promoDiscount;
+            
+            // WhatsApp message WITHOUT revealing promo code
             let message = `🚗 *GO WHEELS - Car Booking Request* 🚗\n\n`;
             message += `*Vehicle:* ${car.name} ${car.year}\n`;
             message += `*Rental Period:* ${pickup} to ${returnDate} (${days} days)\n`;
             message += `*Daily Rate:* MUR ${car.price}\n`;
+            message += `*Subtotal:* MUR ${(car.price * days).toLocaleString()}\n`;
             
             if (discount > 0) {
                 message += `*Long-term Discount:* -MUR ${discount.toLocaleString()}\n`;
             }
             
-            if (car.promoCode && car.promoDiscount > 0) {
-                const promoDiscount = Math.round(total * car.promoDiscount / 100);
-                message += `*Promo Discount (${car.promoCode}):* -MUR ${promoDiscount.toLocaleString()}\n`;
-                message += `*Final Total:* MUR ${(total - promoDiscount).toLocaleString()}\n`;
+            if (promoDiscount > 0) {
+                message += `*Special Discount:* -MUR ${promoDiscount.toLocaleString()}\n`;
+                message += `*Final Total:* MUR ${finalTotal.toLocaleString()}\n`;
             } else {
                 message += `*Total Amount:* MUR ${total.toLocaleString()}\n`;
             }
