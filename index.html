@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GO Wheels | Premium Fleet Management</title>
+    <title>GO Wheels | Premium Car Rental Mauritius</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -16,6 +16,7 @@
             --secondary: #111827;
             --tertiary: #1f2937;
             --accent: #3b82f6;
+            --accent-dark: #1d4ed8;
             --success: #10b981;
             --warning: #f59e0b;
             --danger: #ef4444;
@@ -23,6 +24,8 @@
             --text-secondary: #9ca3af;
             --glass: rgba(255, 255, 255, 0.05);
             --border: rgba(255, 255, 255, 0.08);
+            --shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            --transition: all 0.3s ease;
         }
 
         * {
@@ -32,27 +35,29 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: var(--text-primary);
             min-height: 100vh;
+            line-height: 1.6;
         }
 
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 15px;
+            padding: 0 20px;
         }
 
         /* ===== HEADER ===== */
         .main-header {
-            background: rgba(10, 10, 15, 0.95);
+            background: rgba(10, 10, 15, 0.98);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
+            box-shadow: var(--shadow);
         }
 
         .header-content {
@@ -68,190 +73,375 @@
             gap: 10px;
             text-decoration: none;
             color: white;
-            font-size: 1.5rem;
-            font-weight: bold;
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            background: linear-gradient(135deg, var(--accent), #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .logo i {
             color: var(--accent);
+            font-size: 2rem;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
         }
 
         .header-actions a {
-            padding: 8px 15px;
-            border-radius: 6px;
-            background: #25D366;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #25D366, #128C7E);
             color: white;
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
             font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .header-actions a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
         }
 
         /* ===== HERO SECTION ===== */
         .hero-section {
-            padding: 120px 0 60px;
+            padding: 150px 0 80px;
             text-align: center;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)),
+            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.95)),
                         url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
             background-size: cover;
             background-position: center;
-            margin-top: 60px;
+            background-attachment: fixed;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
         }
 
         .hero-title {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 15px;
-            background: linear-gradient(135deg, #ffffff, var(--accent));
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff, var(--accent), #60a5fa);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
         }
 
         .hero-subtitle {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: var(--text-secondary);
             max-width: 800px;
-            margin: 0 auto 30px;
+            margin: 0 auto 40px;
+            font-weight: 300;
+            line-height: 1.8;
         }
 
         .hero-stats {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            max-width: 800px;
-            margin: 40px auto 0;
+            gap: 20px;
+            max-width: 1000px;
+            margin: 60px auto 0;
         }
 
         .stat-item {
-            background: var(--glass);
-            padding: 20px;
-            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 16px;
             border: 1px solid var(--border);
             text-align: center;
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent);
         }
 
         .stat-value {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--accent);
-            margin-bottom: 5px;
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--accent), #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
         }
 
         .stat-label {
-            font-size: 0.9rem;
+            font-size: 1rem;
             color: var(--text-secondary);
+            font-weight: 500;
         }
 
         /* ===== FLEET SECTION ===== */
         .fleet-section {
-            padding: 60px 0;
+            padding: 80px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
         }
 
         .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            color: white;
+            font-size: 3rem;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #ffffff, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
         }
 
         .section-subtitle {
-            text-align: center;
             color: var(--text-secondary);
-            margin-bottom: 40px;
+            font-size: 1.2rem;
             max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+            margin: 0 auto;
+        }
+
+        /* ===== CAR GRID ===== */
+        .car-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
         }
 
         /* ===== CAR CARD ===== */
         .car-card {
             background: var(--secondary);
-            border-radius: 15px;
+            border-radius: 20px;
             overflow: hidden;
-            margin-bottom: 30px;
             border: 1px solid var(--border);
-            transition: transform 0.3s ease;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            position: relative;
         }
 
         .car-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .car-card.popular::before {
+            content: '🔥 POPULAR';
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, var(--warning), #fbbf24);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            z-index: 2;
+        }
+
+        .car-image {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .car-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .car-card:hover .car-image img {
+            transform: scale(1.05);
+        }
+
+        .car-status {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-available {
+            background: linear-gradient(135deg, var(--success), #34d399);
+            color: white;
+        }
+
+        .status-booked {
+            background: linear-gradient(135deg, var(--danger), #f87171);
+            color: white;
         }
 
         .car-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            padding: 20px;
+            align-items: flex-start;
+            padding: 25px;
             background: var(--tertiary);
         }
 
         .car-title h3 {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             margin-bottom: 5px;
         }
 
         .car-year {
             color: var(--accent);
             font-weight: 600;
+            font-size: 0.95rem;
         }
 
         .car-price {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--accent);
+            font-size: 2.2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--accent), #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .car-price span {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            font-weight: 500;
         }
 
         .car-content {
-            padding: 20px;
+            padding: 0 25px 25px;
         }
 
         .car-specs {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
-            margin: 15px 0;
+            gap: 10px;
+            margin: 20px 0;
         }
 
         .spec {
             background: var(--glass);
-            padding: 6px 12px;
-            border-radius: 20px;
+            padding: 8px 16px;
+            border-radius: 10px;
             font-size: 0.9rem;
             border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .spec i {
+            color: var(--accent);
+        }
+
+        .discount-section {
+            margin: 25px 0;
+        }
+
+        .discount-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-weight: 600;
         }
 
         .discount-tiers {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            margin: 20px 0;
+            gap: 10px;
         }
 
         .discount-tier {
             text-align: center;
-            padding: 10px;
-            background: rgba(59, 130, 246, 0.1);
-            border-radius: 8px;
+            padding: 12px;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0.05));
+            border-radius: 10px;
             border: 1px solid rgba(59, 130, 246, 0.2);
+            transition: var(--transition);
+        }
+
+        .discount-tier:hover {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(59, 130, 246, 0.15));
+            border-color: var(--accent);
         }
 
         .discount-days {
-            font-size: 1rem;
-            font-weight: 700;
+            font-size: 1.1rem;
+            font-weight: 800;
             color: var(--accent);
             margin-bottom: 4px;
         }
 
         .discount-percent {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: 600;
             color: var(--success);
         }
 
-        .calendar-section {
+        .promo-section {
             margin: 20px 0;
-            padding-top: 20px;
+            padding: 15px;
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(245, 158, 11, 0.05));
+            border-radius: 12px;
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .promo-section i {
+            color: var(--warning);
+            font-size: 1.2rem;
+        }
+
+        .promo-code {
+            background: rgba(245, 158, 11, 0.2);
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-weight: 700;
+            color: var(--warning);
+            margin-left: 5px;
+            border: 1px dashed var(--warning);
+        }
+
+        .calendar-section {
+            margin: 25px 0;
+            padding-top: 25px;
             border-top: 1px solid var(--border);
         }
 
@@ -266,132 +456,251 @@
             position: relative;
         }
 
+        .date-input i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent);
+        }
+
         .date-input input {
             width: 100%;
-            padding: 12px;
+            padding: 14px 14px 14px 40px;
             background: var(--tertiary);
             border: 1px solid var(--border);
-            border-radius: 8px;
+            border-radius: 10px;
             color: var(--text-primary);
             cursor: pointer;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .date-input input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
         }
 
         .price-calculator {
             background: var(--tertiary);
-            border-radius: 12px;
-            padding: 20px;
-            margin: 20px 0;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
             border: 1px solid var(--border);
+            display: none;
         }
 
         .price-row {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 10px;
-            padding-bottom: 10px;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
             border-bottom: 1px solid var(--border);
         }
 
         .price-row.total {
-            font-weight: 700;
-            font-size: 1.1rem;
+            font-weight: 800;
+            font-size: 1.2rem;
             border-bottom: none;
-            margin-top: 10px;
-            padding-top: 10px;
+            margin-top: 15px;
+            padding-top: 15px;
             border-top: 2px solid var(--border);
         }
 
         .action-buttons {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-top: 20px;
+            gap: 15px;
+            margin-top: 25px;
         }
 
         .action-btn {
-            padding: 12px;
+            padding: 15px;
             border: none;
-            border-radius: 8px;
-            font-weight: 600;
+            border-radius: 12px;
+            font-weight: 700;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 10px;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+
+        .action-btn:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
 
         .btn-book {
-            background: var(--accent);
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
             color: white;
+        }
+
+        .btn-book:hover:not(:disabled) {
+            background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
         }
 
         .btn-whatsapp {
-            background: #25D366;
+            background: linear-gradient(135deg, #25D366, #128C7E);
             color: white;
         }
 
+        .btn-whatsapp:hover:not(:disabled) {
+            background: linear-gradient(135deg, #128C7E, #25D366);
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+        }
+
         .action-btn:disabled {
-            opacity: 0.5;
+            opacity: 0.6;
             cursor: not-allowed;
+            transform: none !important;
+        }
+
+        /* ===== FILTERS ===== */
+        .filters {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 12px 25px;
+            background: var(--tertiary);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+
+        .filter-btn.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .filter-btn:hover {
+            border-color: var(--accent);
+            color: var(--text-primary);
         }
 
         /* ===== FOOTER ===== */
         .footer {
             background: var(--secondary);
-            padding: 40px 0;
-            margin-top: 60px;
+            padding: 60px 0 30px;
+            margin-top: 80px;
             border-top: 1px solid var(--border);
         }
 
         .footer-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
         }
 
         .footer-section h3 {
             color: var(--accent);
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
         }
 
         .footer-section p {
             color: var(--text-secondary);
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-section a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent);
+            transform: translateX(5px);
         }
 
         .social-links {
             display: flex;
-            gap: 10px;
-            margin-top: 15px;
+            gap: 15px;
+            margin-top: 20px;
         }
 
         .social-link {
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
-            background: var(--glass);
+            background: var(--tertiary);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
+            text-decoration: none;
+            transition: var(--transition);
+            border: 1px solid var(--border);
+        }
+
+        .social-link:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+            border-color: var(--accent);
         }
 
         .copyright {
             text-align: center;
-            margin-top: 30px;
-            padding-top: 20px;
+            margin-top: 50px;
+            padding-top: 25px;
             border-top: 1px solid var(--border);
             color: var(--text-secondary);
+            font-size: 0.9rem;
         }
 
         /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .car-grid {
+                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            }
+        }
+
         @media (max-width: 768px) {
             .hero-title {
-                font-size: 2rem;
+                font-size: 2.2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
             }
             
             .hero-stats {
                 grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .car-grid {
+                grid-template-columns: 1fr;
             }
             
             .action-buttons {
@@ -404,7 +713,50 @@
             
             .discount-tiers {
                 grid-template-columns: 1fr;
+                gap: 8px;
             }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .hero-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .filters {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+
+        /* ===== LOADING ===== */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 60px;
+        }
+
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 3px solid var(--tertiary);
+            border-top: 3px solid var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
@@ -415,11 +767,11 @@
             <div class="header-content">
                 <a href="#" class="logo">
                     <i class="fas fa-car"></i>
-                    GO WHEELS
+                    <span>GO</span>WHEELS
                 </a>
                 <div class="header-actions">
                     <a href="https://wa.me/23058100935" target="_blank">
-                        <i class="fab fa-whatsapp"></i> WhatsApp
+                        <i class="fab fa-whatsapp"></i> Book via WhatsApp
                     </a>
                 </div>
             </div>
@@ -429,14 +781,14 @@
     <!-- Hero Section -->
     <section class="hero-section">
         <div class="container">
-            <h1 class="hero-title">Premium Car Rental Experience</h1>
+            <h1 class="hero-title">Premium Car Rental in Mauritius</h1>
             <p class="hero-subtitle">
-                Experience luxury mobility with our premium fleet. Book instantly, get the best rates, 
-                and enjoy professional service.
+                Experience luxury mobility with our premium fleet. Competitive rates, professional service, 
+                and seamless booking process. Your journey, elevated.
             </p>
             <div class="hero-stats">
                 <div class="stat-item">
-                    <div class="stat-value" id="availableCount">7</div>
+                    <div class="stat-value" id="availableCount">0</div>
                     <div class="stat-label">Available Cars</div>
                 </div>
                 <div class="stat-item">
@@ -444,12 +796,12 @@
                     <div class="stat-label">Customer Rating</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-value">30min</div>
-                    <div class="stat-label">Delivery Time</div>
+                    <div class="stat-value">24/7</div>
+                    <div class="stat-label">Support</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-value">100%</div>
-                    <div class="stat-label">Satisfaction</div>
+                    <div class="stat-value">0%</div>
+                    <div class="stat-label">Hidden Fees</div>
                 </div>
             </div>
         </div>
@@ -458,14 +810,27 @@
     <!-- Fleet Section -->
     <section class="fleet-section">
         <div class="container">
-            <h2 class="section-title">Our Premium Fleet</h2>
-            <p class="section-subtitle">
-                Select from our carefully curated collection of premium vehicles. 
-                Each car is maintained to the highest standards.
-            </p>
+            <div class="section-header">
+                <h2 class="section-title">Our Premium Fleet</h2>
+                <p class="section-subtitle">
+                    Select from our carefully curated collection of premium vehicles. 
+                    Each car is maintained to the highest standards for your comfort and safety.
+                </p>
+            </div>
 
-            <div id="fleetContainer">
+            <div class="filters">
+                <button class="filter-btn active" onclick="filterCars('all')">All Cars</button>
+                <button class="filter-btn" onclick="filterCars('available')">Available Now</button>
+                <button class="filter-btn" onclick="filterCars('popular')">Most Popular</button>
+                <button class="filter-btn" onclick="filterCars('suv')">SUVs</button>
+                <button class="filter-btn" onclick="filterCars('economy')">Economy</button>
+            </div>
+
+            <div id="fleetContainer" class="car-grid">
                 <!-- Cars will load here automatically -->
+                <div class="loading" id="loadingIndicator">
+                    <div class="loader"></div>
+                </div>
             </div>
         </div>
     </section>
@@ -476,79 +841,62 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>GO WHEELS</h3>
-                    <p>Premium car rental service with professional fleet management.</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Mauritius, Indian Ocean</p>
                     <p><i class="fas fa-phone"></i> +230 5810 0935</p>
                     <p><i class="fas fa-envelope"></i> booking@gowheelsmu.com</p>
+                    <p><i class="fas fa-clock"></i> 24/7 Customer Support</p>
                     <div class="social-links">
                         <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
                         <a href="https://wa.me/23058100935" class="social-link" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
                     </div>
                 </div>
                 
                 <div class="footer-section">
                     <h3>Quick Links</h3>
-                    <p><a href="#" style="color: var(--text-secondary); text-decoration: none;">Our Fleet</a></p>
-                    <p><a href="#" style="color: var(--text-secondary); text-decoration: none;">Pricing</a></p>
-                    <p><a href="#" style="color: var(--text-secondary); text-decoration: none;">Contact</a></p>
+                    <a href="#fleetContainer">Browse Fleet</a>
+                    <a href="#" onclick="filterCars('available')">Available Cars</a>
+                    <a href="#">Pricing & Rates</a>
+                    <a href="#">Terms & Conditions</a>
+                    <a href="#">Privacy Policy</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Our Services</h3>
+                    <a href="#">Airport Pickup</a>
+                    <a href="#">Long-term Rental</a>
+                    <a href="#">Corporate Fleet</a>
+                    <a href="#">Luxury Cars</a>
+                    <a href="#">24/7 Roadside Assistance</a>
                 </div>
                 
                 <div class="footer-section">
                     <h3>Business Hours</h3>
-                    <p>Mon-Fri: 7:00 AM - 10:00 PM</p>
-                    <p>Sat-Sun: 8:00 AM - 10:00 PM</p>
-                    <p>24/7 Emergency Support</p>
+                    <p><strong>Mon-Fri:</strong> 7:00 AM - 10:00 PM</p>
+                    <p><strong>Sat-Sun:</strong> 8:00 AM - 10:00 PM</p>
+                    <p><strong>Emergency:</strong> 24/7 Available</p>
+                    <p><strong>Airport:</strong> 24/7 Service</p>
                 </div>
             </div>
             
             <div class="copyright">
-                © 2024 GO WHEELS Mauritius. All rights reserved.
+                © 2024 GO WHEELS Mauritius. All rights reserved. | Designed for Premium Car Rental Experience
             </div>
         </div>
     </footer>
 
     <script>
-        // ===== EASY CAR TEMPLATE SYSTEM =====
-        // ===================================
-        // TO ADD A NEW CAR:
-        // 1. COPY the template below
-        // 2. PASTE it in the cars array
-        // 3. CHANGE the values
-        // 4. DONE!
-
-        /*
-        // ===== CAR TEMPLATE (COPY THIS) =====
-        {
-            id: "car-8", // Change number
-            name: "New Car Name",
-            year: "2024",
-            price: 1500, // Daily price
-            status: "available", // "available" or "booked"
-            features: ["Automatic", "5 Seats", "Feature 1", "Feature 2"],
-            images: [
-                "https://image-url-1.jpg",
-                "https://image-url-2.jpg"
-            ],
-            discounts: [5, 10, 15], // Discounts for 5+, 10+, 15+ days
-            popular: true, // true or false
-            promoCode: "WASSIM99", // Your promo code
-            promoDiscount: 5, // Discount percentage
-            blockedDates: ["2024-12-25", "2024-12-31"] // Dates to block
-        },
-        */
-
-        // ===== YOUR CARS ARRAY =====
-        // ADD NEW CARS BELOW THIS LINE
-        // COPY & PASTE TEMPLATE ABOVE
+        // ===== CAR DATA =====
         const cars = [
-            // Suzuki Swift 2024
             {
                 id: "car-1",
                 name: "Suzuki Swift",
                 year: "2024",
                 price: 1300,
-                status: "booked
-                features: ["Automatic", "5 Seats", "Touchscreen", "Fuel Efficient"],
+                status: "available",
+                category: ["popular", "economy"],
+                features: ["Automatic", "5 Seats", "Touchscreen", "Fuel Efficient", "Bluetooth", "Air Conditioning"],
                 images: [
                     "images/naz3.jpg",
                     "images/naz4.jpg"
@@ -559,15 +907,14 @@
                 promoDiscount: 5,
                 blockedDates: []
             },
-
-            // Suzuki Swift 2025
             {
                 id: "car-2",
                 name: "Suzuki Swift",
                 year: "2025",
                 price: 1300,
                 status: "available",
-                features: ["2025 Model", "Automatic", "5 Seats", "Premium Sound"],
+                category: ["popular", "economy"],
+                features: ["2025 Model", "Automatic", "5 Seats", "Premium Sound", "LED Lights", "Rear Camera"],
                 images: [
                     "images/naz3.jpg",
                     "images/naz4.jpg"
@@ -578,15 +925,14 @@
                 promoDiscount: 5,
                 blockedDates: []
             },
-
-            // Toyota Vitz 2019
             {
                 id: "car-3",
                 name: "Toyota Vitz",
                 year: "2019",
                 price: 1300,
                 status: "booked",
-                features: ["Automatic", "5 Seats", "Fuel Efficient", "Blue Color"],
+                category: ["economy"],
+                features: ["Automatic", "5 Seats", "Fuel Efficient", "Blue Color", "Power Windows", "FM Radio"],
                 images: [
                     "images/naz8.jpg",
                     "images/naz8.jpg"
@@ -597,15 +943,14 @@
                 promoDiscount: 5,
                 blockedDates: []
             },
-
-            // AK13 2021
             {
                 id: "car-4",
                 name: "AK13",
                 year: "2021",
                 price: 1300,
-                status: "booked",
-                features: ["Automatic", "5 Seats", "Modern Design", "Grey Color"],
+                status: "available",
+                category: ["economy"],
+                features: ["Automatic", "5 Seats", "Modern Design", "Grey Color", "USB Ports", "Power Steering"],
                 images: [
                     "images/naz9.jpg",
                     "images/naz9.jpg"
@@ -616,15 +961,14 @@
                 promoDiscount: 5,
                 blockedDates: []
             },
-
-            // Toyota Cruiser 2019
             {
                 id: "car-5",
                 name: "Toyota Cruiser",
                 year: "2019",
                 price: 2000,
-                status: "booked",
-                features: ["SUV", "7 Seats", "Powerful", "Spacious"],
+                status: "available",
+                category: ["suv", "popular"],
+                features: ["SUV", "7 Seats", "Powerful", "Spacious", "4x4", "Sunroof", "Leather Seats"],
                 images: [
                     "images/naz5.jpg",
                     "images/naz6.jpg"
@@ -635,39 +979,37 @@
                 promoDiscount: 5,
                 blockedDates: []
             },
-
-            // Perodua Axia 2024
             {
                 id: "car-6",
                 name: "Perodua Axia",
                 year: "2023",
                 price: 1200,
                 status: "available",
-                features: ["Automatic", "5 Seats", "Fuel Efficient", "Compact"],
+                category: ["economy"],
+                features: ["Automatic", "5 Seats", "Fuel Efficient", "Compact", "Easy Parking", "Low Maintenance"],
                 images: [
                     "images/naz11.jpg",
                     "images/naz11.jpg"
                 ],
-                discounts: [5, 7, 10], // 5%, 7%, 10% discounts
-                popular: true,
+                discounts: [5, 7, 10],
+                popular: false,
                 promoCode: "WASSIM99",
                 promoDiscount: 5,
                 blockedDates: []
             },
-
-            // Ford Ranger Raptor 2024
             {
                 id: "car-7",
                 name: "Ford Ranger Raptor",
                 year: "2025",
                 price: 4000,
                 status: "available",
-                features: ["4x4", "Pickup Truck", "7 Seats", "Premium Off-road"],
+                category: ["suv", "popular"],
+                features: ["4x4", "Pickup Truck", "7 Seats", "Premium Off-road", "Turbo Diesel", "Off-road Package"],
                 images: [
                     "images/naz12.jpg",
                     "images/naz12.jpg"
                 ],
-                discounts: [5, 10, 15], // 5%, 10%, 15% discounts
+                discounts: [5, 10, 15],
                 popular: true,
                 promoCode: "WASSIM99",
                 promoDiscount: 5,
@@ -675,26 +1017,85 @@
             }
         ];
 
-        // ===== WEBSITE CODE (DON'T TOUCH BELOW) =====
+        // ===== WEBSITE INITIALIZATION =====
         document.addEventListener('DOMContentLoaded', function() {
-            renderFleet();
-            updateStats();
-            setTimeout(initializeDatePickers, 500);
+            // Initial render with slight delay to show loading
+            setTimeout(() => {
+                renderFleet(cars);
+                updateStats();
+                setTimeout(initializeDatePickers, 300);
+            }, 800);
+            
+            // Add active class to filter buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
         });
 
-        function renderFleet() {
+        let currentFilter = 'all';
+
+        function filterCars(filter) {
+            currentFilter = filter;
+            let filteredCars = [...cars];
+            
+            switch(filter) {
+                case 'available':
+                    filteredCars = cars.filter(car => car.status === 'available');
+                    break;
+                case 'popular':
+                    filteredCars = cars.filter(car => car.popular);
+                    break;
+                case 'suv':
+                    filteredCars = cars.filter(car => car.category.includes('suv'));
+                    break;
+                case 'economy':
+                    filteredCars = cars.filter(car => car.category.includes('economy'));
+                    break;
+                default:
+                    filteredCars = cars;
+            }
+            
+            renderFleet(filteredCars);
+            setTimeout(initializeDatePickers, 100);
+        }
+
+        function renderFleet(carsArray) {
             const container = document.getElementById('fleetContainer');
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            
+            // Hide loading indicator
+            if (loadingIndicator) {
+                loadingIndicator.style.display = 'none';
+            }
+            
+            // Clear container
             container.innerHTML = '';
             
-            cars.forEach(car => {
+            if (carsArray.length === 0) {
+                container.innerHTML = `
+                    <div style="grid-column: 1/-1; text-align: center; padding: 60px; background: var(--tertiary); border-radius: 15px; border: 2px dashed var(--border);">
+                        <i class="fas fa-car" style="font-size: 3rem; color: var(--text-secondary); margin-bottom: 20px;"></i>
+                        <h3 style="color: var(--text-primary); margin-bottom: 10px;">No Cars Found</h3>
+                        <p style="color: var(--text-secondary);">Try adjusting your filter criteria</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            carsArray.forEach(car => {
                 const card = document.createElement('div');
-                card.className = 'car-card';
+                card.className = `car-card ${car.popular ? 'popular' : ''}`;
                 card.id = car.id;
                 
+                // Prepare features HTML
                 const featuresHTML = car.features.map(f => 
-                    `<div class="spec">${f}</div>`
+                    `<div class="spec"><i class="fas fa-check-circle"></i> ${f}</div>`
                 ).join('');
                 
+                // Prepare discount HTML
                 const discountHTML = `
                     <div class="discount-tiers">
                         <div class="discount-tier">
@@ -707,24 +1108,38 @@
                         </div>
                         <div class="discount-tier">
                             <div class="discount-days">15+ Days</div>
-                            <div class="discount-percent">${car.discounts[2]}% OFF</div>
+                            <div class="discount-percent">${car.discounts[2] || car.discounts[1]}% OFF</div>
                         </div>
                     </div>
                 `;
                 
+                // Prepare promo HTML
                 const promoHTML = car.promoCode 
-                    ? `<div style="margin: 15px 0; padding: 10px; background: rgba(245, 158, 11, 0.1); border-radius: 8px; border: 1px solid rgba(245, 158, 11, 0.2);">
-                           <strong>Promo Code:</strong> ${car.promoCode} (${car.promoDiscount}% OFF)
+                    ? `<div class="promo-section">
+                           <i class="fas fa-tag"></i>
+                           <div>
+                               <strong style="color: var(--text-primary);">Special Promo:</strong> Use code 
+                               <span class="promo-code">${car.promoCode}</span> for ${car.promoDiscount}% OFF
+                           </div>
                        </div>`
                     : '';
                 
+                // Card HTML structure
                 card.innerHTML = `
+                    <div class="car-image">
+                        <img src="${car.images[0]}" alt="${car.name} ${car.year}" 
+                             onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'">
+                        <div class="car-status ${car.status === 'available' ? 'status-available' : 'status-booked'}">
+                            ${car.status === 'available' ? 'Available' : 'Booked'}
+                        </div>
+                    </div>
+                    
                     <div class="car-header">
                         <div class="car-title">
                             <h3>${car.name} ${car.year}</h3>
-                            <div class="car-year">${car.status === 'available' ? '✅ Available' : '❌ Booked'}</div>
+                            <div class="car-year">Premium Category</div>
                         </div>
-                        <div class="car-price">MUR ${car.price}/day</div>
+                        <div class="car-price">MUR ${car.price}<span>/day</span></div>
                     </div>
                     
                     <div class="car-content">
@@ -732,22 +1147,29 @@
                             ${featuresHTML}
                         </div>
                         
-                        ${discountHTML}
+                        <div class="discount-section">
+                            <div class="discount-title">
+                                <i class="fas fa-percentage"></i>
+                                <span>Long-term Rental Discounts</span>
+                            </div>
+                            ${discountHTML}
+                        </div>
                         
                         ${promoHTML}
                         
-                        ${car.popular ? '<div style="padding: 8px; background: rgba(245, 158, 11, 0.1); border-radius: 8px; border: 1px solid rgba(245, 158, 11, 0.2); margin: 10px 0;"><i class="fas fa-star" style="color: #f59e0b;"></i> <strong>Popular Choice</strong></div>' : ''}
-                        
                         ${car.status === 'available' ? `
                             <div class="calendar-section">
-                                <div style="margin-bottom: 10px; font-weight: 600; color: var(--accent);">
-                                    <i class="fas fa-calendar-alt"></i> Select Dates
+                                <div style="margin-bottom: 10px; font-weight: 600; color: var(--accent); display: flex; align-items: center; gap: 10px;">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <span>Select Rental Dates</span>
                                 </div>
                                 <div class="date-grid">
                                     <div class="date-input">
+                                        <i class="fas fa-calendar-plus"></i>
                                         <input type="text" id="pickup-${car.id}" placeholder="Pick-up Date" readonly>
                                     </div>
                                     <div class="date-input">
+                                        <i class="fas fa-calendar-check"></i>
                                         <input type="text" id="return-${car.id}" placeholder="Return Date" readonly>
                                     </div>
                                 </div>
@@ -755,8 +1177,8 @@
                             
                             <div class="price-calculator" id="price-${car.id}" style="display: none;">
                                 <div class="price-row">
-                                    <span>Rental Days:</span>
-                                    <span id="days-${car.id}">0</span>
+                                    <span>Rental Period:</span>
+                                    <span id="days-${car.id}">0 days</span>
                                 </div>
                                 <div class="price-row">
                                     <span>Daily Rate:</span>
@@ -766,23 +1188,27 @@
                                     <span>Subtotal:</span>
                                     <span id="subtotal-${car.id}">MUR 0</span>
                                 </div>
+                                <div class="price-row" id="discount-${car.id}" style="display: none;">
+                                    <span>Long-term Discount:</span>
+                                    <span id="discount-amount-${car.id}">MUR 0</span>
+                                </div>
                                 <div class="price-row total">
                                     <span>Total Amount:</span>
-                                    <span id="total-${car.id}" style="color: var(--accent); font-weight: 800;">MUR 0</span>
+                                    <span id="total-${car.id}" style="color: var(--accent); font-weight: 900;">MUR 0</span>
                                 </div>
                             </div>
                             
                             <div class="action-buttons">
-                                <button class="action-btn btn-book" onclick="bookCar('${car.id}')">
+                                <button class="action-btn btn-book" onclick="bookCar('${car.id}')" id="book-btn-${car.id}" disabled>
                                     <i class="fas fa-check-circle"></i> Book Now
                                 </button>
                                 <button class="action-btn btn-whatsapp" onclick="whatsappInquiry('${car.id}')">
-                                    <i class="fab fa-whatsapp"></i> WhatsApp
+                                    <i class="fab fa-whatsapp"></i> WhatsApp Inquiry
                                 </button>
                             </div>
                         ` : `
                             <div class="action-buttons">
-                                <button class="action-btn" disabled>
+                                <button class="action-btn" disabled style="background: var(--tertiary);">
                                     <i class="fas fa-times-circle"></i> Currently Booked
                                 </button>
                                 <button class="action-btn btn-whatsapp" onclick="whatsappInquiry('${car.id}')">
@@ -795,8 +1221,6 @@
                 
                 container.appendChild(card);
             });
-            
-            initializeDatePickers();
         }
 
         function initializeDatePickers() {
@@ -838,20 +1262,22 @@
 
         function calculatePrice(carId) {
             const car = cars.find(c => c.id === carId);
-            if (!car) return;
+            if (!car) return null;
             
             const pickupInput = document.getElementById(`pickup-${carId}`);
             const returnInput = document.getElementById(`return-${carId}`);
             const priceCalculator = document.getElementById(`price-${carId}`);
+            const bookButton = document.getElementById(`book-btn-${carId}`);
             
-            if (!pickupInput || !returnInput || !priceCalculator) return;
+            if (!pickupInput || !returnInput || !priceCalculator) return null;
             
             const pickup = pickupInput.value;
             const returnDate = returnInput.value;
             
             if (!pickup || !returnDate) {
                 priceCalculator.style.display = 'none';
-                return;
+                if (bookButton) bookButton.disabled = true;
+                return null;
             }
             
             const start = new Date(pickup);
@@ -860,27 +1286,39 @@
             
             if (days <= 0) {
                 priceCalculator.style.display = 'none';
-                return;
+                if (bookButton) bookButton.disabled = true;
+                return null;
             }
             
             let subtotal = car.price * days;
             let discount = 0;
+            let discountPercent = 0;
             
             if (days >= 15) {
-                discount = Math.round(subtotal * car.discounts[2] / 100);
+                discountPercent = car.discounts[2] || car.discounts[1];
             } else if (days >= 10) {
-                discount = Math.round(subtotal * car.discounts[1] / 100);
+                discountPercent = car.discounts[1];
             } else if (days >= 5) {
-                discount = Math.round(subtotal * car.discounts[0] / 100);
+                discountPercent = car.discounts[0];
             }
             
+            discount = Math.round(subtotal * discountPercent / 100);
             const total = subtotal - discount;
             
-            document.getElementById(`days-${carId}`).textContent = days;
-            document.getElementById(`subtotal-${carId}`).textContent = `MUR ${subtotal}`;
-            document.getElementById(`total-${carId}`).textContent = `MUR ${total}`;
+            // Update display
+            document.getElementById(`days-${carId}`).textContent = `${days} ${days === 1 ? 'day' : 'days'}`;
+            document.getElementById(`subtotal-${carId}`).textContent = `MUR ${subtotal.toLocaleString()}`;
+            document.getElementById(`total-${carId}`).textContent = `MUR ${total.toLocaleString()}`;
+            
+            if (discount > 0) {
+                document.getElementById(`discount-${carId}`).style.display = 'flex';
+                document.getElementById(`discount-amount-${carId}`).textContent = `MUR ${discount.toLocaleString()} (${discountPercent}%)`;
+            } else {
+                document.getElementById(`discount-${carId}`).style.display = 'none';
+            }
             
             priceCalculator.style.display = 'block';
+            if (bookButton) bookButton.disabled = false;
             
             return { car, days, total, pickup, returnDate, discount };
         }
@@ -888,32 +1326,37 @@
         function bookCar(carId) {
             const booking = calculatePrice(carId);
             if (!booking) {
-                alert('Please select valid dates first.');
+                alert('⚠️ Please select valid dates first.');
                 return;
             }
             
             const { car, days, total, pickup, returnDate, discount } = booking;
             
-            let message = `🚗 *GO WHEELS Booking Request* 🚗\n\n`;
+            let message = `🚗 *GO WHEELS - Car Booking Request* 🚗\n\n`;
             message += `*Vehicle:* ${car.name} ${car.year}\n`;
-            message += `*Pick-up Date:* ${pickup}\n`;
-            message += `*Return Date:* ${returnDate}\n`;
-            message += `*Rental Days:* ${days} days\n`;
+            message += `*Rental Period:* ${pickup} to ${returnDate} (${days} days)\n`;
             message += `*Daily Rate:* MUR ${car.price}\n`;
             
             if (discount > 0) {
-                message += `*Long-term Discount:* MUR ${discount}\n`;
+                message += `*Long-term Discount:* -MUR ${discount.toLocaleString()}\n`;
             }
             
             if (car.promoCode && car.promoDiscount > 0) {
                 const promoDiscount = Math.round(total * car.promoDiscount / 100);
-                message += `*Promo Discount (${car.promoCode}):* MUR ${promoDiscount}\n`;
-                message += `*Final Total:* MUR ${total - promoDiscount}\n`;
+                message += `*Promo Discount (${car.promoCode}):* -MUR ${promoDiscount.toLocaleString()}\n`;
+                message += `*Final Total:* MUR ${(total - promoDiscount).toLocaleString()}\n`;
             } else {
-                message += `*Total Amount:* MUR ${total}\n`;
+                message += `*Total Amount:* MUR ${total.toLocaleString()}\n`;
             }
             
-            message += `\nPlease confirm availability.`;
+            message += `\n📋 *Customer Information:*\n`;
+            message += `Name: \n`;
+            message += `Phone: \n`;
+            message += `Email: \n`;
+            message += `Pickup Location: \n`;
+            message += `Drop-off Location: \n`;
+            
+            message += `\n✅ Please confirm availability and send booking instructions.`;
             
             const encodedMessage = encodeURIComponent(message);
             window.open(`https://wa.me/23058100935?text=${encodedMessage}`, '_blank');
@@ -923,7 +1366,7 @@
             const car = cars.find(c => c.id === carId);
             if (!car) return;
             
-            const message = `Hello, I'm interested in the ${car.name} ${car.year}. Please provide more information and availability.`;
+            const message = `Hello GO WHEELS! 👋\n\nI'm interested in the ${car.name} ${car.year}.\n\nPlease provide:\n1. Availability for my dates\n2. More details about this vehicle\n3. Any special offers\n\nThank you!`;
             const encodedMessage = encodeURIComponent(message);
             window.open(`https://wa.me/23058100935?text=${encodedMessage}`, '_blank');
         }
