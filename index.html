@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GO Wheels | Premium Fleet Management</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -10,130 +10,49 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     
     <style>
-        /* ===== MODERN RESET & VARIABLES ===== */
+        /* ===== RESET & VARIABLES ===== */
         :root {
             --primary: #0a0a0f;
             --secondary: #111827;
             --tertiary: #1f2937;
             --accent: #3b82f6;
-            --accent-glow: rgba(59, 130, 246, 0.3);
             --success: #10b981;
             --warning: #f59e0b;
             --danger: #ef4444;
             --text-primary: #f9fafb;
             --text-secondary: #9ca3af;
             --glass: rgba(255, 255, 255, 0.05);
-            --glass-dark: rgba(0, 0, 0, 0.6);
             --border: rgba(255, 255, 255, 0.08);
-            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.4);
-            --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.3);
-            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        html, body {
-            width: 100%;
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: var(--text-primary);
-            line-height: 1.6;
-            scroll-behavior: smooth;
+            min-height: 100vh;
         }
 
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 0% 20%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 100% 80%, rgba(59, 130, 246, 0.03) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        /* ===== CONTAINER ===== */
         .container {
             max-width: 1400px;
             margin: 0 auto;
             padding: 0 15px;
         }
 
-        /* ===== LOADING SCREEN ===== */
-        .loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--primary);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            animation: fadeOut 0.5s ease 2s forwards;
-        }
-
-        @keyframes fadeOut {
-            to { opacity: 0; visibility: hidden; }
-        }
-
-        .loading-animation {
-            width: 80px;
-            height: 80px;
-            position: relative;
-            margin-bottom: 20px;
-        }
-
-        .loading-circle {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border: 3px solid transparent;
-            border-top: 3px solid var(--accent);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        .loading-circle:nth-child(2) {
-            width: 70%;
-            height: 70%;
-            top: 15%;
-            left: 15%;
-            border-top: 3px solid var(--success);
-            animation: spin 0.8s linear infinite reverse;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
         /* ===== HEADER ===== */
         .main-header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
             background: rgba(10, 10, 15, 0.95);
             backdrop-filter: blur(20px);
-            z-index: 1000;
             border-bottom: 1px solid var(--border);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
         }
 
         .header-content {
@@ -148,100 +67,41 @@
             align-items: center;
             gap: 10px;
             text-decoration: none;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
         }
 
-        .logo-icon {
-            font-size: 1.8rem;
-            background: linear-gradient(135deg, var(--accent), #60a5fa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .logo-text {
-            font-size: 1.3rem;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-        }
-
-        .logo-text span {
-            background: linear-gradient(135deg, var(--accent), #60a5fa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .admin-btn, .whatsapp-btn {
-            padding: 8px 15px;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            border: none;
-        }
-
-        .admin-btn {
-            background: var(--glass);
-            border: 1px solid var(--border);
-            color: var(--text-primary);
-        }
-
-        .admin-btn:hover {
-            border-color: var(--accent);
+        .logo i {
             color: var(--accent);
         }
 
-        .whatsapp-btn {
-            background: linear-gradient(135deg, #25D366, #128C7E);
+        .header-actions a {
+            padding: 8px 15px;
+            border-radius: 6px;
+            background: #25D366;
             color: white;
-        }
-
-        .whatsapp-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.2);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 600;
         }
 
         /* ===== HERO SECTION ===== */
         .hero-section {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 80px 0 40px;
-            position: relative;
-        }
-
-        .hero-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            padding: 120px 0 60px;
+            text-align: center;
             background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)),
                         url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
             background-size: cover;
             background-position: center;
-            filter: brightness(0.4);
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 800px;
+            margin-top: 60px;
         }
 
         .hero-title {
-            font-size: clamp(2rem, 6vw, 3.5rem);
+            font-size: 3rem;
             font-weight: 800;
-            line-height: 1.1;
             margin-bottom: 15px;
             background: linear-gradient(135deg, #ffffff, var(--accent));
             -webkit-background-clip: text;
@@ -249,427 +109,103 @@
         }
 
         .hero-subtitle {
-            font-size: clamp(0.9rem, 3vw, 1.1rem);
+            font-size: 1.2rem;
             color: var(--text-secondary);
-            margin-bottom: 30px;
-            line-height: 1.5;
+            max-width: 800px;
+            margin: 0 auto 30px;
         }
 
         .hero-stats {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
             gap: 15px;
-            margin-top: 40px;
+            max-width: 800px;
+            margin: 40px auto 0;
         }
 
         .stat-item {
-            text-align: center;
-            padding: 20px;
             background: var(--glass);
+            padding: 20px;
             border-radius: 12px;
             border: 1px solid var(--border);
+            text-align: center;
         }
 
         .stat-value {
             font-size: 2rem;
             font-weight: 800;
+            color: var(--accent);
             margin-bottom: 5px;
-            background: linear-gradient(135deg, var(--accent), #60a5fa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
 
         .stat-label {
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
-
-        /* ===== ADMIN PANEL ===== */
-        .admin-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 2000;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .admin-panel {
-            background: var(--secondary);
-            border-radius: 20px;
-            padding: 30px;
-            width: 100%;
-            max-width: 800px;
-            max-height: 90vh;
-            overflow-y: auto;
-            border: 1px solid var(--border);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .admin-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .admin-header h2 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--accent), #60a5fa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .close-admin {
-            background: none;
-            border: 1px solid var(--border);
-            color: var(--text-primary);
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .close-admin:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-
-        .admin-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 15px;
-        }
-
-        .admin-card {
-            background: var(--tertiary);
-            border-radius: 12px;
-            padding: 20px;
-            border: 1px solid var(--border);
-        }
-
-        .admin-card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .car-name {
-            font-size: 1.1rem;
-            font-weight: 700;
-        }
-
-        .car-price {
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: var(--accent);
-        }
-
-        .availability-toggle {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-top: 15px;
-        }
-
-        .toggle-label {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-        }
-
-        .toggle-slider {
-            width: 50px;
-            height: 25px;
-            background: var(--glass);
-            border-radius: 25px;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .toggle-slider::before {
-            content: '';
-            position: absolute;
-            width: 19px;
-            height: 19px;
-            background: var(--text-secondary);
-            border-radius: 50%;
-            top: 3px;
-            left: 3px;
-            transition: all 0.3s ease;
-        }
-
-        input[type="checkbox"]:checked + .toggle-slider {
-            background: rgba(16, 185, 129, 0.2);
-        }
-
-        input[type="checkbox"]:checked + .toggle-slider::before {
-            background: var(--success);
-            transform: translateX(25px);
-        }
-
-        .toggle-status {
-            font-size: 0.8rem;
-            font-weight: 600;
-            min-width: 70px;
-        }
-
-        .available-status { color: var(--success); }
-        .booked-status { color: var(--danger); }
-
-        input[type="checkbox"] { display: none; }
 
         /* ===== FLEET SECTION ===== */
         .fleet-section {
             padding: 60px 0;
         }
 
-        .section-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
         .section-title {
-            font-size: clamp(1.8rem, 5vw, 2.5rem);
-            font-weight: 800;
+            text-align: center;
+            font-size: 2.5rem;
             margin-bottom: 10px;
-            background: linear-gradient(135deg, var(--text-primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: white;
         }
 
         .section-subtitle {
-            font-size: 1rem;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .coming-soon {
             text-align: center;
-            padding: 30px;
-            background: var(--glass);
-            border-radius: 15px;
-            border: 2px dashed var(--border);
-            margin-top: 30px;
-        }
-
-        .coming-soon h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: var(--accent);
-        }
-
-        .coming-soon p {
             color: var(--text-secondary);
-            font-size: 1rem;
-        }
-
-        /* ===== FLEET GRID ===== */
-        .fleet-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 25px;
-        }
-
-        @media (max-width: 768px) {
-            .fleet-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         /* ===== CAR CARD ===== */
         .car-card {
             background: var(--secondary);
-            border-radius: 20px;
+            border-radius: 15px;
             overflow: hidden;
+            margin-bottom: 30px;
             border: 1px solid var(--border);
-            transition: all 0.3s ease;
-            position: relative;
+            transition: transform 0.3s ease;
         }
 
         .car-card:hover {
             transform: translateY(-5px);
-            border-color: var(--accent);
-            box-shadow: var(--shadow-md);
-        }
-
-        .car-badges {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            right: 15px;
-            display: flex;
-            justify-content: space-between;
-            z-index: 2;
-        }
-
-        .status-badge {
-            padding: 6px 12px;
-            border-radius: 15px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            backdrop-filter: blur(10px);
-        }
-
-        .status-available {
-            background: rgba(16, 185, 129, 0.2);
-            color: var(--success);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-        }
-
-        .status-booked {
-            background: rgba(239, 68, 68, 0.2);
-            color: var(--danger);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-        }
-
-        .popular-badge {
-            background: rgba(245, 158, 11, 0.2);
-            color: var(--warning);
-            border: 1px solid rgba(245, 158, 11, 0.3);
-        }
-
-        /* ===== IMAGE SLIDER ===== */
-        .image-slider-container {
-            height: 220px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        @media (max-width: 480px) {
-            .image-slider-container {
-                height: 180px;
-            }
-        }
-
-        .image-slider {
-            display: flex;
-            width: 200%;
-            height: 100%;
-            transition: transform 0.3s ease;
-        }
-
-        .car-image {
-            width: 50%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .slider-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 36px;
-            height: 36px;
-            background: rgba(0, 0, 0, 0.6);
-            border: 1px solid var(--border);
-            border-radius: 50%;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            opacity: 0.7;
-            font-size: 0.8rem;
-            z-index: 2;
-        }
-
-        .slider-nav:hover {
-            background: var(--accent);
-            opacity: 1;
-            transform: translateY(-50%) scale(1.1);
-        }
-
-        .prev-btn { left: 10px; }
-        .next-btn { right: 10px; }
-
-        .slider-dots {
-            position: absolute;
-            bottom: 10px;
-            left: 0;
-            right: 0;
-            display: flex;
-            justify-content: center;
-            gap: 6px;
-            z-index: 2;
-        }
-
-        .dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .dot.active {
-            background: var(--accent);
-            transform: scale(1.2);
-        }
-
-        /* ===== CAR CONTENT ===== */
-        .car-content {
-            padding: 20px;
         }
 
         .car-header {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 15px;
+            align-items: center;
+            padding: 20px;
+            background: var(--tertiary);
         }
 
         .car-title h3 {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 4px;
+            font-size: 1.5rem;
+            margin-bottom: 5px;
         }
 
         .car-year {
             color: var(--accent);
-            font-size: 0.85rem;
             font-weight: 600;
         }
 
-        .car-price-display {
-            text-align: right;
-        }
-
-        .daily-rate {
+        .car-price {
             font-size: 1.8rem;
             font-weight: 800;
             color: var(--accent);
-            line-height: 1;
         }
 
-        .per-day {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
+        .car-content {
+            padding: 20px;
         }
 
-        /* ===== CAR SPECS ===== */
         .car-specs {
             display: flex;
             flex-wrap: wrap;
@@ -677,30 +213,27 @@
             margin: 15px 0;
         }
 
-        .car-specs .spec {
+        .spec {
             background: var(--glass);
             padding: 6px 12px;
             border-radius: 20px;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             border: 1px solid var(--border);
-            color: var(--text-secondary);
         }
 
-        /* ===== DISCOUNT SECTION ===== */
         .discount-tiers {
-            display: flex;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 8px;
-            margin: 15px 0;
+            margin: 20px 0;
         }
 
         .discount-tier {
-            flex: 1;
             text-align: center;
             padding: 10px;
             background: rgba(59, 130, 246, 0.1);
-            border-radius: 10px;
+            border-radius: 8px;
             border: 1px solid rgba(59, 130, 246, 0.2);
-            font-size: 0.85rem;
         }
 
         .discount-days {
@@ -716,88 +249,17 @@
             color: var(--success);
         }
 
-        /* ===== PROMO CODE ===== */
-        .promo-section {
-            margin: 15px 0;
-        }
-
-        .promo-input-group {
-            display: flex;
-            gap: 10px;
-        }
-
-        .promo-input {
-            flex: 1;
-            padding: 12px;
-            background: var(--tertiary);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            color: var(--text-primary);
-            font-size: 0.9rem;
-        }
-
-        .promo-input:focus {
-            outline: none;
-            border-color: var(--accent);
-        }
-
-        .apply-promo-btn {
-            padding: 12px 20px;
-            background: var(--accent);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .apply-promo-btn:hover:not(:disabled) {
-            background: #2563eb;
-        }
-
-        .apply-promo-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .promo-message {
-            margin-top: 8px;
-            font-size: 0.85rem;
-            min-height: 20px;
-        }
-
-        .promo-success { color: var(--success); }
-        .promo-error { color: var(--danger); }
-
-        /* ===== CALENDAR ===== */
         .calendar-section {
-            margin-top: 20px;
+            margin: 20px 0;
             padding-top: 20px;
             border-top: 1px solid var(--border);
-        }
-
-        .calendar-header {
-            font-size: 0.95rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: var(--accent);
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
 
         .date-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 15px;
-        }
-
-        @media (max-width: 480px) {
-            .date-grid {
-                grid-template-columns: 1fr;
-            }
+            gap: 15px;
+            margin: 15px 0;
         }
 
         .date-input {
@@ -806,122 +268,66 @@
 
         .date-input input {
             width: 100%;
-            padding: 14px;
+            padding: 12px;
             background: var(--tertiary);
             border: 1px solid var(--border);
-            border-radius: 10px;
+            border-radius: 8px;
             color: var(--text-primary);
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
             cursor: pointer;
         }
 
-        .date-input input:focus {
-            outline: none;
-            border-color: var(--accent);
-        }
-
-        .date-input i {
-            position: absolute;
-            right: 14px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-secondary);
-            pointer-events: none;
-        }
-
-        /* ===== PRICE CALCULATOR ===== */
         .price-calculator {
             background: var(--tertiary);
             border-radius: 12px;
             padding: 20px;
-            margin-top: 20px;
+            margin: 20px 0;
             border: 1px solid var(--border);
-            display: none;
-        }
-
-        .price-calculator.visible {
-            display: block;
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         .price-row {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-            padding-bottom: 12px;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
             border-bottom: 1px solid var(--border);
-            font-size: 0.9rem;
-        }
-
-        .price-row:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
         }
 
         .price-row.total {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 2px solid var(--border);
+            font-weight: 700;
             font-size: 1.1rem;
-            font-weight: 700;
+            border-bottom: none;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 2px solid var(--border);
         }
 
-        .price-value {
-            font-weight: 600;
-        }
-
-        .discount-value {
-            color: var(--success);
-            font-weight: 700;
-        }
-
-        .promo-value {
-            color: var(--warning);
-            font-weight: 700;
-        }
-
-        .total-amount {
-            font-size: 1.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--accent), #60a5fa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* ===== ACTION BUTTONS ===== */
         .action-buttons {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            gap: 10px;
             margin-top: 20px;
         }
 
-        @media (max-width: 480px) {
-            .action-buttons {
-                grid-template-columns: 1fr;
-            }
-        }
-
         .action-btn {
-            padding: 16px;
+            padding: 12px;
             border: none;
-            border-radius: 10px;
-            font-size: 0.95rem;
+            border-radius: 8px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
+        }
+
+        .btn-book {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
         }
 
         .action-btn:disabled {
@@ -929,77 +335,34 @@
             cursor: not-allowed;
         }
 
-        .action-btn:not(:disabled):hover {
-            transform: translateY(-2px);
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent), #2563eb);
-            color: white;
-        }
-
-        .btn-primary:not(:disabled):hover {
-            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
-        }
-
-        .btn-secondary {
-            background: var(--glass);
-            border: 1px solid var(--border);
-            color: var(--text-primary);
-        }
-
-        .btn-secondary:not(:disabled):hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-
         /* ===== FOOTER ===== */
-        .main-footer {
+        .footer {
             background: var(--secondary);
-            border-top: 1px solid var(--border);
-            padding: 50px 0 30px;
+            padding: 40px 0;
             margin-top: 60px;
+            border-top: 1px solid var(--border);
         }
 
-        .footer-grid {
+        .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 30px;
-            margin-bottom: 40px;
         }
 
         .footer-section h3 {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 20px;
             color: var(--accent);
+            margin-bottom: 15px;
         }
 
-        .footer-section p, .footer-section a {
+        .footer-section p {
             color: var(--text-secondary);
             margin-bottom: 10px;
-            display: block;
-            text-decoration: none;
-            transition: color 0.3s ease;
-            font-size: 0.9rem;
-        }
-
-        .footer-section a:hover {
-            color: var(--accent);
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 15px;
-            font-size: 0.9rem;
         }
 
         .social-links {
             display: flex;
-            gap: 12px;
-            margin-top: 20px;
+            gap: 10px;
+            margin-top: 15px;
         }
 
         .social-link {
@@ -1010,197 +373,53 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--text-primary);
-            transition: all 0.3s ease;
-            font-size: 1rem;
-        }
-
-        .social-link:hover {
-            background: var(--accent);
             color: white;
-            transform: translateY(-3px);
         }
 
         .copyright {
             text-align: center;
-            padding-top: 30px;
+            margin-top: 30px;
+            padding-top: 20px;
             border-top: 1px solid var(--border);
             color: var(--text-secondary);
-            font-size: 0.85rem;
         }
 
-        /* ===== TOAST NOTIFICATION ===== */
-        .toast-container {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-        }
-
-        .toast {
-            background: var(--secondary);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 15px;
-            margin-top: 10px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            box-shadow: var(--shadow-md);
-            transform: translateX(100%);
-            transition: transform 0.3s ease;
-            max-width: 350px;
-        }
-
-        .toast.show {
-            transform: translateX(0);
-        }
-
-        .toast-icon {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-        }
-
-        .toast.success .toast-icon {
-            background: rgba(16, 185, 129, 0.1);
-            color: var(--success);
-        }
-
-        .toast.error .toast-icon {
-            background: rgba(239, 68, 68, 0.1);
-            color: var(--danger);
-        }
-
-        .toast.info .toast-icon {
-            background: rgba(59, 130, 246, 0.1);
-            color: var(--accent);
-        }
-
-        .toast-message {
-            font-size: 0.9rem;
-            font-weight: 500;
-            flex: 1;
-        }
-
-        /* ===== SCROLLBAR ===== */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--primary);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--accent);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #2563eb;
-        }
-
-        /* ===== MOBILE OPTIMIZATION ===== */
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
-            .container {
-                padding: 0 10px;
+            .hero-title {
+                font-size: 2rem;
             }
             
-            .header-content {
-                padding: 12px 0;
-            }
-            
-            .admin-btn, .whatsapp-btn {
-                padding: 6px 12px;
-                font-size: 0.8rem;
-            }
-            
-            .hero-section {
-                padding: 70px 0 30px;
-            }
-            
-            .fleet-section {
-                padding: 40px 0;
-            }
-            
-            .main-footer {
-                padding: 40px 0 20px;
-                margin-top: 40px;
-            }
-        }
-
-        @media (max-width: 480px) {
             .hero-stats {
                 grid-template-columns: repeat(2, 1fr);
             }
             
-            .stat-item {
-                padding: 15px;
-            }
-            
-            .admin-panel {
-                padding: 20px;
-            }
-            
-            .admin-grid {
+            .action-buttons {
                 grid-template-columns: 1fr;
             }
             
-            .footer-grid {
+            .date-grid {
                 grid-template-columns: 1fr;
-                gap: 25px;
+            }
+            
+            .discount-tiers {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div class="loading-screen">
-        <div class="loading-animation">
-            <div class="loading-circle"></div>
-            <div class="loading-circle"></div>
-        </div>
-        <div class="loading-text">Initializing Premium Fleet System</div>
-    </div>
-
-    <!-- Admin Panel -->
-    <div class="admin-overlay" id="adminOverlay">
-        <div class="admin-panel">
-            <div class="admin-header">
-                <h2>Fleet Management Dashboard</h2>
-                <button class="close-admin" onclick="closeAdminPanel()">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="admin-grid" id="adminGrid">
-                <!-- Admin cards will be loaded here -->
-            </div>
-        </div>
-    </div>
-
-    <!-- Main Header -->
+    <!-- Header -->
     <header class="main-header">
         <div class="container">
             <div class="header-content">
                 <a href="#" class="logo">
-                    <div class="logo-icon">
-                        <i class="fas fa-car"></i>
-                    </div>
-                    <div class="logo-text">GO <span>WHEELS</span></div>
+                    <i class="fas fa-car"></i>
+                    GO WHEELS
                 </a>
                 <div class="header-actions">
-                    <button class="admin-btn" onclick="openAdminPanel()">
-                        <i class="fas fa-cog"></i>
-                        Manage Fleet
-                    </button>
-                    <a href="https://wa.me/23058100935" class="whatsapp-btn" target="_blank">
-                        <i class="fab fa-whatsapp"></i>
-                        WhatsApp
+                    <a href="https://wa.me/23058100935" target="_blank">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
                     </a>
                 </div>
             </div>
@@ -1209,31 +428,28 @@
 
     <!-- Hero Section -->
     <section class="hero-section">
-        <div class="hero-background"></div>
         <div class="container">
-            <div class="hero-content">
-                <h1 class="hero-title">Premium Car Rental Experience</h1>
-                <p class="hero-subtitle">
-                    Experience luxury mobility with our premium fleet. Book instantly, get the best rates, 
-                    and enjoy professional service. Your journey, elevated.
-                </p>
-                <div class="hero-stats">
-                    <div class="stat-item">
-                        <div class="stat-value" id="availableCount">0</div>
-                        <div class="stat-label">Available Cars</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">4.9★</div>
-                        <div class="stat-label">Customer Rating</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">30min</div>
-                        <div class="stat-label">Delivery Time</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">100%</div>
-                        <div class="stat-label">Satisfaction</div>
-                    </div>
+            <h1 class="hero-title">Premium Car Rental Experience</h1>
+            <p class="hero-subtitle">
+                Experience luxury mobility with our premium fleet. Book instantly, get the best rates, 
+                and enjoy professional service.
+            </p>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-value" id="availableCount">7</div>
+                    <div class="stat-label">Available Cars</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">4.9★</div>
+                    <div class="stat-label">Customer Rating</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">30min</div>
+                    <div class="stat-label">Delivery Time</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">100%</div>
+                    <div class="stat-label">Satisfaction</div>
                 </div>
             </div>
         </div>
@@ -1242,366 +458,334 @@
     <!-- Fleet Section -->
     <section class="fleet-section">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Our Premium Fleet</h2>
-                <p class="section-subtitle">
-                    Select from our carefully curated collection of premium vehicles. 
-                    Each car is maintained to the highest standards for your comfort and safety.
-                </p>
-            </div>
+            <h2 class="section-title">Our Premium Fleet</h2>
+            <p class="section-subtitle">
+                Select from our carefully curated collection of premium vehicles. 
+                Each car is maintained to the highest standards.
+            </p>
 
-            <div class="fleet-grid" id="fleetGrid">
-                <!-- Car cards will be loaded here -->
-            </div>
-
-            <div class="coming-soon">
-                <h3>More Premium Vehicles Coming Soon!</h3>
-                <p>We're constantly expanding our fleet with the latest models. Stay tuned for updates.</p>
+            <div id="fleetContainer">
+                <!-- Cars will load here automatically -->
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="main-footer">
+    <footer class="footer">
         <div class="container">
-            <div class="footer-grid">
+            <div class="footer-content">
                 <div class="footer-section">
                     <h3>GO WHEELS</h3>
-                    <p>Premium car rental service with professional fleet management and 24/7 customer support.</p>
-                    <div class="contact-item">
-                        <i class="fas fa-phone"></i>
-                        <span>+230 5810 0935</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <span>booking@gowheelsmu.com</span>
-                    </div>
+                    <p>Premium car rental service with professional fleet management.</p>
+                    <p><i class="fas fa-phone"></i> +230 5810 0935</p>
+                    <p><i class="fas fa-envelope"></i> booking@gowheelsmu.com</p>
                     <div class="social-links">
                         <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
                         <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
                         <a href="https://wa.me/23058100935" class="social-link" target="_blank"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
+                
                 <div class="footer-section">
                     <h3>Quick Links</h3>
-                    <a href="#fleetSection">Our Fleet</a>
-                    <a href="#" onclick="showToast('Coming soon!', 'info')">Pricing</a>
-                    <a href="#" onclick="showToast('Coming soon!', 'info')">Locations</a>
-                    <a href="#" onclick="showToast('Coming soon!', 'info')">FAQ</a>
+                    <p><a href="#" style="color: var(--text-secondary); text-decoration: none;">Our Fleet</a></p>
+                    <p><a href="#" style="color: var(--text-secondary); text-decoration: none;">Pricing</a></p>
+                    <p><a href="#" style="color: var(--text-secondary); text-decoration: none;">Contact</a></p>
                 </div>
+                
                 <div class="footer-section">
                     <h3>Business Hours</h3>
-                    <p><strong>Monday - Friday:</strong> 7:00 AM - 10:00 PM</p>
-                    <p><strong>Saturday - Sunday:</strong> 8:00 AM - 10:00 PM</p>
-                    <p><strong>Emergency Support:</strong> 24/7 Available</p>
+                    <p>Mon-Fri: 7:00 AM - 10:00 PM</p>
+                    <p>Sat-Sun: 8:00 AM - 10:00 PM</p>
+                    <p>24/7 Emergency Support</p>
                 </div>
             </div>
+            
             <div class="copyright">
-                © <span id="currentYear"></span> GO WHEELS Mauritius. Premium Car Rental Service.
+                © 2024 GO WHEELS Mauritius. All rights reserved.
             </div>
         </div>
     </footer>
 
-    <!-- Toast Container -->
-    <div class="toast-container" id="toastContainer"></div>
-
     <script>
-        // ===== CONFIGURATION =====
-        const CONFIG = {
-            whatsappNumber: "23058100935",
-            companyName: "GO Wheels Mauritius",
-            currency: "MUR",
-            promoCode: "wassim99", // Secret promo code
-            promoDiscount: 5, // 5% discount
-            
-            // Discount tiers for long-term rentals
-            discounts: [
-                { days: 7, percent: 5 },
-                { days: 14, percent: 10 },
-                { days: 30, percent: 15 }
+        // ===== EASY CAR TEMPLATE SYSTEM =====
+        // ===================================
+        // TO ADD A NEW CAR:
+        // 1. COPY the template below
+        // 2. PASTE it in the cars array
+        // 3. CHANGE the values
+        // 4. DONE!
+
+        /*
+        // ===== CAR TEMPLATE (COPY THIS) =====
+        {
+            id: "car-8", // Change number
+            name: "New Car Name",
+            year: "2024",
+            price: 1500, // Daily price
+            status: "available", // "available" or "booked"
+            features: ["Automatic", "5 Seats", "Feature 1", "Feature 2"],
+            images: [
+                "https://image-url-1.jpg",
+                "https://image-url-2.jpg"
             ],
-            
-            // Fleet data - Suzuki Swift 2024 available from Feb 3, 2026
-            cars: [
-                {
-                    id: "swift2024",
-                    name: "Suzuki Swift",
-                    year: "2024",
-                    dailyRate: 1300,
-                    features: ["Automatic", "5 Seats", "Touchscreen", "Fuel Efficient"],
-                    images: [
-                        "images/naz3.jpg",
-                        "images/naz4.jpg"
-                    ],
-                    availability: "available",
-                    popular: true,
-                    blockedDates: [{ "from": "2026-02-01", "to": "2026-02-04" }] // Only blocked until Feb 2
-                },
-                {
-                    id: "swift2025",
-                    name: "Suzuki Swift",
-                    year: "2025",
-                    dailyRate: 1300,
-                    features: ["2025 Model", "Automatic", "5 Seats", "Premium Sound"],
-                    images: [
-                        "images/naz1.jpg",
-                        "images/naz1.jpg"
-                    ],
-                    availability: "booked",
-                    popular: true,
-                    blockedDates: []
-                },
-                {
-                    id: "vitz2019",
-                    name: "Toyota Vitz",
-                    year: "2019",
-                    dailyRate: 1300,
-                    features: ["Automatic", "5 Seats", "Fuel Efficient", "Blue Color"],
-                    images: [
-                        "images/naz7.jpg",
-                        "images/naz8.jpg"
-                    ],
-                    availability: "booked",
-                    popular: false,
-                    blockedDates: []
-                },
-                {
-                    id: "ak132021",
-                    name: "AK13",
-                    year: "2021",
-                    dailyRate: 1300,
-                    features: ["Automatic", "5 Seats", "Modern Design", "Grey Color"],
-                    images: [
-                        "images/naz9.jpg",
-                        "images/naz9.jpg"
-                    ],
-                    availability: "booked",
-                    popular: false,
-                    blockedDates: []
-                },
-                {
-                    id: "cruiser2019",
-                    name: "Urban Cruiser",
-                    year: "2019",
-                    dailyRate: 2000,
-                    features: ["SUV", "7 Seats", "Powerful", "Spacious"],
-                    images: [
-                        "images/naz5.jpg",
-                        "images/naz6.jpg"
-                    ],
-                    availability: "booked",
-                    popular: true,
-                    blockedDates: []
-                }
-            ]
-        };
+            discounts: [5, 10, 15], // Discounts for 5+, 10+, 15+ days
+            popular: true, // true or false
+            promoCode: "WASSIM99", // Your promo code
+            promoDiscount: 5, // Discount percentage
+            blockedDates: ["2024-12-25", "2024-12-31"] // Dates to block
+        },
+        */
 
-        // ===== STATE MANAGEMENT =====
-        let fleetState = {
-            cars: [],
-            appliedPromoCodes: {}, // Store applied promo codes per car
-            promoCodeValid: {} // Store promo code validation status per car
-        };
+        // ===== YOUR CARS ARRAY =====
+        // ADD NEW CARS BELOW THIS LINE
+        // COPY & PASTE TEMPLATE ABOVE
+        const cars = [
+            // Suzuki Swift 2024
+            {
+                id: "car-1",
+                name: "Suzuki Swift",
+                year: "2024",
+                price: 1300,
+                status: "booked
+                features: ["Automatic", "5 Seats", "Touchscreen", "Fuel Efficient"],
+                images: [
+                    "images/naz3.jpg",
+                    "images/naz4.jpg"
+                ],
+                discounts: [5, 10, 15],
+                popular: true,
+                promoCode: "WASSIM99",
+                promoDiscount: 5,
+                blockedDates: []
+            },
 
-        // ===== INITIALIZATION =====
+            // Suzuki Swift 2025
+            {
+                id: "car-2",
+                name: "Suzuki Swift",
+                year: "2025",
+                price: 1300,
+                status: "available",
+                features: ["2025 Model", "Automatic", "5 Seats", "Premium Sound"],
+                images: [
+                    "images/naz3.jpg",
+                    "images/naz4.jpg"
+                ],
+                discounts: [5, 10, 15],
+                popular: true,
+                promoCode: "WASSIM99",
+                promoDiscount: 5,
+                blockedDates: []
+            },
+
+            // Toyota Vitz 2019
+            {
+                id: "car-3",
+                name: "Toyota Vitz",
+                year: "2019",
+                price: 1300,
+                status: "booked",
+                features: ["Automatic", "5 Seats", "Fuel Efficient", "Blue Color"],
+                images: [
+                    "images/naz8.jpg",
+                    "images/naz8.jpg"
+                ],
+                discounts: [5, 10, 15],
+                popular: false,
+                promoCode: "WASSIM99",
+                promoDiscount: 5,
+                blockedDates: []
+            },
+
+            // AK13 2021
+            {
+                id: "car-4",
+                name: "AK13",
+                year: "2021",
+                price: 1300,
+                status: "booked",
+                features: ["Automatic", "5 Seats", "Modern Design", "Grey Color"],
+                images: [
+                    "images/naz9.jpg",
+                    "images/naz9.jpg"
+                ],
+                discounts: [5, 10, 15],
+                popular: false,
+                promoCode: "WASSIM99",
+                promoDiscount: 5,
+                blockedDates: []
+            },
+
+            // Toyota Cruiser 2019
+            {
+                id: "car-5",
+                name: "Toyota Cruiser",
+                year: "2019",
+                price: 2000,
+                status: "booked",
+                features: ["SUV", "7 Seats", "Powerful", "Spacious"],
+                images: [
+                    "images/naz5.jpg",
+                    "images/naz6.jpg"
+                ],
+                discounts: [5, 10, 15],
+                popular: true,
+                promoCode: "WASSIM99",
+                promoDiscount: 5,
+                blockedDates: []
+            },
+
+            // Perodua Axia 2024
+            {
+                id: "car-6",
+                name: "Perodua Axia",
+                year: "2023",
+                price: 1200,
+                status: "available",
+                features: ["Automatic", "5 Seats", "Fuel Efficient", "Compact"],
+                images: [
+                    "images/naz11.jpg",
+                    "images/naz11.jpg"
+                ],
+                discounts: [5, 7, 10], // 5%, 7%, 10% discounts
+                popular: true,
+                promoCode: "WASSIM99",
+                promoDiscount: 5,
+                blockedDates: []
+            },
+
+            // Ford Ranger Raptor 2024
+            {
+                id: "car-7",
+                name: "Ford Ranger Raptor",
+                year: "2025",
+                price: 4000,
+                status: "available",
+                features: ["4x4", "Pickup Truck", "7 Seats", "Premium Off-road"],
+                images: [
+                    "images/naz12.jpg",
+                    "images/naz12.jpg"
+                ],
+                discounts: [5, 10, 15], // 5%, 10%, 15% discounts
+                popular: true,
+                promoCode: "WASSIM99",
+                promoDiscount: 5,
+                blockedDates: []
+            }
+        ];
+
+        // ===== WEBSITE CODE (DON'T TOUCH BELOW) =====
         document.addEventListener('DOMContentLoaded', function() {
-            // Set current year in footer
-            document.getElementById('currentYear').textContent = new Date().getFullYear();
-            
-            // Remove loading screen after delay
-            setTimeout(() => {
-                document.querySelector('.loading-screen').style.display = 'none';
-            }, 2000);
-            
-            // Initialize fleet
-            initializeFleet();
+            renderFleet();
+            updateStats();
+            setTimeout(initializeDatePickers, 500);
         });
 
-        // ===== FLEET MANAGEMENT =====
-        function initializeFleet() {
-            // Load saved availability from localStorage
-            const savedAvailability = JSON.parse(localStorage.getItem('fleetAvailability')) || {};
-            
-            // Initialize cars with saved availability or default
-            fleetState.cars = CONFIG.cars.map(car => {
-                return {
-                    ...car,
-                    availability: savedAvailability[car.id] || car.availability
-                };
-            });
-            
-            // Update stats
-            updateStats();
-            
-            // Render fleet
-            renderFleet();
-            
-            // Render admin panel
-            renderAdminPanel();
-        }
-
-        function updateStats() {
-            const available = fleetState.cars.filter(car => car.availability === 'available').length;
-            document.getElementById('availableCount').textContent = available;
-        }
-
-        function saveFleetState() {
-            const availability = {};
-            fleetState.cars.forEach(car => {
-                availability[car.id] = car.availability;
-            });
-            
-            localStorage.setItem('fleetAvailability', JSON.stringify(availability));
-            updateStats();
-            renderFleet();
-            renderAdminPanel();
-            
-            showToast('Fleet status updated successfully', 'success');
-        }
-
-        // ===== RENDER FLEET =====
         function renderFleet() {
-            const grid = document.getElementById('fleetGrid');
-            grid.innerHTML = '';
+            const container = document.getElementById('fleetContainer');
+            container.innerHTML = '';
             
-            fleetState.cars.forEach((car, index) => {
+            cars.forEach(car => {
                 const card = document.createElement('div');
                 card.className = 'car-card';
-                card.style.setProperty('--card-index', index);
+                card.id = car.id;
                 
-                // Determine badges
-                let statusBadge = '';
-                if (car.availability === 'available') {
-                    statusBadge = '<div class="status-badge status-available"><i class="fas fa-check-circle"></i> Available</div>';
-                } else {
-                    statusBadge = '<div class="status-badge status-booked"><i class="fas fa-times-circle"></i> Booked</div>';
-                }
-                
-                const popularBadge = car.popular ? 
-                    '<div class="status-badge popular-badge"><i class="fas fa-star"></i> Popular</div>' : '';
-                
-                // Create features HTML
-                const featuresHTML = car.features.map(feature => 
-                    `<div class="spec">${feature}</div>`
+                const featuresHTML = car.features.map(f => 
+                    `<div class="spec">${f}</div>`
                 ).join('');
                 
-                // Create discount tiers HTML
-                const discountHTML = CONFIG.discounts.map(discount => `
-                    <div class="discount-tier">
-                        <div class="discount-days">${discount.days}+ Days</div>
-                        <div class="discount-percent">${discount.percent}% OFF</div>
+                const discountHTML = `
+                    <div class="discount-tiers">
+                        <div class="discount-tier">
+                            <div class="discount-days">5+ Days</div>
+                            <div class="discount-percent">${car.discounts[0]}% OFF</div>
+                        </div>
+                        <div class="discount-tier">
+                            <div class="discount-days">10+ Days</div>
+                            <div class="discount-percent">${car.discounts[1]}% OFF</div>
+                        </div>
+                        <div class="discount-tier">
+                            <div class="discount-days">15+ Days</div>
+                            <div class="discount-percent">${car.discounts[2]}% OFF</div>
+                        </div>
                     </div>
-                `).join('');
+                `;
+                
+                const promoHTML = car.promoCode 
+                    ? `<div style="margin: 15px 0; padding: 10px; background: rgba(245, 158, 11, 0.1); border-radius: 8px; border: 1px solid rgba(245, 158, 11, 0.2);">
+                           <strong>Promo Code:</strong> ${car.promoCode} (${car.promoDiscount}% OFF)
+                       </div>`
+                    : '';
                 
                 card.innerHTML = `
-                    <div class="car-badges">
-                        ${statusBadge}
-                        ${popularBadge}
-                    </div>
-                    
-                    <div class="image-slider-container">
-                        <div class="image-slider" id="slider-${car.id}">
-                            <img src="${car.images[0]}" alt="${car.name}" class="car-image" loading="lazy">
-                            <img src="${car.images[1]}" alt="${car.name} interior" class="car-image" loading="lazy">
+                    <div class="car-header">
+                        <div class="car-title">
+                            <h3>${car.name} ${car.year}</h3>
+                            <div class="car-year">${car.status === 'available' ? '✅ Available' : '❌ Booked'}</div>
                         </div>
-                        <button class="slider-nav prev-btn" onclick="prevImage('${car.id}')">
-                            <i class="fas fa-chevron-left"></i>
-                        </button>
-                        <button class="slider-nav next-btn" onclick="nextImage('${car.id}')">
-                            <i class="fas fa-chevron-right"></i>
-                        </button>
-                        <div class="slider-dots" id="dots-${car.id}">
-                            <div class="dot active" onclick="goToImage('${car.id}', 0)"></div>
-                            <div class="dot" onclick="goToImage('${car.id}', 1)"></div>
-                        </div>
+                        <div class="car-price">MUR ${car.price}/day</div>
                     </div>
                     
                     <div class="car-content">
-                        <div class="car-header">
-                            <div class="car-title">
-                                <h3>${car.name}</h3>
-                                <div class="car-year">${car.year} Model</div>
-                            </div>
-                            <div class="car-price-display">
-                                <div class="daily-rate">${CONFIG.currency} ${car.dailyRate.toLocaleString()}</div>
-                                <div class="per-day">per day</div>
-                            </div>
-                        </div>
-                        
                         <div class="car-specs">
                             ${featuresHTML}
                         </div>
                         
-                        <div class="discount-tiers">
-                            ${discountHTML}
-                        </div>
+                        ${discountHTML}
                         
-                        ${car.availability === 'available' ? `
-                            <div class="promo-section">
-                                <div class="promo-input-group">
-                                    <input type="text" class="promo-input" id="promo-${car.id}" placeholder="Enter promo code">
-                                    <button class="apply-promo-btn" onclick="applyPromoCode('${car.id}')">Apply</button>
-                                </div>
-                                <div class="promo-message" id="promo-message-${car.id}"></div>
-                            </div>
-                            
+                        ${promoHTML}
+                        
+                        ${car.popular ? '<div style="padding: 8px; background: rgba(245, 158, 11, 0.1); border-radius: 8px; border: 1px solid rgba(245, 158, 11, 0.2); margin: 10px 0;"><i class="fas fa-star" style="color: #f59e0b;"></i> <strong>Popular Choice</strong></div>' : ''}
+                        
+                        ${car.status === 'available' ? `
                             <div class="calendar-section">
-                                <div class="calendar-header">
+                                <div style="margin-bottom: 10px; font-weight: 600; color: var(--accent);">
                                     <i class="fas fa-calendar-alt"></i> Select Dates
                                 </div>
                                 <div class="date-grid">
                                     <div class="date-input">
-                                        <input type="text" id="${car.id}-pickup" placeholder="Pick-up Date" readonly>
-                                        <i class="fas fa-calendar-plus"></i>
+                                        <input type="text" id="pickup-${car.id}" placeholder="Pick-up Date" readonly>
                                     </div>
                                     <div class="date-input">
-                                        <input type="text" id="${car.id}-return" placeholder="Return Date" readonly>
-                                        <i class="fas fa-calendar-check"></i>
+                                        <input type="text" id="return-${car.id}" placeholder="Return Date" readonly>
                                     </div>
                                 </div>
                             </div>
                             
-                            <div class="price-calculator" id="calculator-${car.id}">
+                            <div class="price-calculator" id="price-${car.id}" style="display: none;">
                                 <div class="price-row">
                                     <span>Rental Days:</span>
-                                    <span class="price-value" id="${car.id}-days">0</span>
+                                    <span id="days-${car.id}">0</span>
                                 </div>
                                 <div class="price-row">
                                     <span>Daily Rate:</span>
-                                    <span class="price-value">${CONFIG.currency} ${car.dailyRate.toLocaleString()}</span>
+                                    <span>MUR ${car.price}</span>
                                 </div>
                                 <div class="price-row">
                                     <span>Subtotal:</span>
-                                    <span class="price-value" id="${car.id}-subtotal">${CONFIG.currency} 0</span>
-                                </div>
-                                <div class="price-row" id="${car.id}-discount-row" style="display: none;">
-                                    <span>Long-term Discount:</span>
-                                    <span class="price-value discount-value" id="${car.id}-discount">${CONFIG.currency} 0</span>
-                                </div>
-                                <div class="price-row" id="${car.id}-promo-row" style="display: none;">
-                                    <span>Promo Discount (${CONFIG.promoDiscount}%):</span>
-                                    <span class="price-value promo-value" id="${car.id}-promo-discount">${CONFIG.currency} 0</span>
+                                    <span id="subtotal-${car.id}">MUR 0</span>
                                 </div>
                                 <div class="price-row total">
                                     <span>Total Amount:</span>
-                                    <span class="total-amount" id="${car.id}-total">${CONFIG.currency} 0</span>
+                                    <span id="total-${car.id}" style="color: var(--accent); font-weight: 800;">MUR 0</span>
                                 </div>
                             </div>
                             
                             <div class="action-buttons">
-                                <button class="action-btn btn-primary" onclick="bookCar('${car.id}')" id="book-btn-${car.id}">
+                                <button class="action-btn btn-book" onclick="bookCar('${car.id}')">
                                     <i class="fas fa-check-circle"></i> Book Now
                                 </button>
-                                <button class="action-btn btn-secondary" onclick="bookViaWhatsApp('${car.id}')">
+                                <button class="action-btn btn-whatsapp" onclick="whatsappInquiry('${car.id}')">
                                     <i class="fab fa-whatsapp"></i> WhatsApp
                                 </button>
                             </div>
                         ` : `
                             <div class="action-buttons">
-                                <button class="action-btn btn-primary" disabled>
+                                <button class="action-btn" disabled>
                                     <i class="fas fa-times-circle"></i> Currently Booked
                                 </button>
-                                <button class="action-btn btn-secondary" onclick="bookViaWhatsApp('${car.id}')">
+                                <button class="action-btn btn-whatsapp" onclick="whatsappInquiry('${car.id}')">
                                     <i class="fab fa-whatsapp"></i> Check Availability
                                 </button>
                             </div>
@@ -1609,365 +793,145 @@
                     </div>
                 `;
                 
-                grid.appendChild(card);
-                
-                // Initialize date picker if car is available
-                if (car.availability === 'available') {
-                    setTimeout(() => initializeDatePicker(car), 100);
+                container.appendChild(card);
+            });
+            
+            initializeDatePickers();
+        }
+
+        function initializeDatePickers() {
+            cars.forEach(car => {
+                if (car.status === 'available') {
+                    const pickupInput = document.getElementById(`pickup-${car.id}`);
+                    const returnInput = document.getElementById(`return-${car.id}`);
+                    
+                    if (pickupInput && !pickupInput._flatpickr) {
+                        flatpickr(pickupInput, {
+                            minDate: "today",
+                            dateFormat: "Y-m-d",
+                            disable: car.blockedDates,
+                            onChange: function(selectedDates) {
+                                if (selectedDates[0]) {
+                                    const returnPicker = returnInput._flatpickr;
+                                    const nextDay = new Date(selectedDates[0]);
+                                    nextDay.setDate(nextDay.getDate() + 1);
+                                    returnPicker.set('minDate', nextDay);
+                                }
+                                calculatePrice(car.id);
+                            }
+                        });
+                    }
+                    
+                    if (returnInput && !returnInput._flatpickr) {
+                        flatpickr(returnInput, {
+                            minDate: "today",
+                            dateFormat: "Y-m-d",
+                            disable: car.blockedDates,
+                            onChange: function() {
+                                calculatePrice(car.id);
+                            }
+                        });
+                    }
                 }
             });
         }
 
-        // ===== IMAGE SLIDER FUNCTIONS =====
-        function prevImage(carId) {
-            const slider = document.getElementById(`slider-${carId}`);
-            slider.style.transform = 'translateX(-50%)';
-            updateDots(carId, 1);
-        }
-
-        function nextImage(carId) {
-            const slider = document.getElementById(`slider-${carId}`);
-            slider.style.transform = 'translateX(0%)';
-            updateDots(carId, 0);
-        }
-
-        function goToImage(carId, index) {
-            const slider = document.getElementById(`slider-${carId}`);
-            slider.style.transform = `translateX(-${index * 50}%)`;
-            updateDots(carId, index);
-        }
-
-        function updateDots(carId, activeIndex) {
-            const dots = document.querySelectorAll(`#dots-${carId} .dot`);
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === activeIndex);
-            });
-        }
-
-        // ===== DATE PICKER =====
-        function initializeDatePicker(car) {
-            // Get tomorrow's date for Suzuki Swift 2024 (available from Feb 3)
-            const tomorrow = new Date();
-            tomorrow.setDate(tomorrow.getDate() + 1);
-            
-            // Format date as YYYY-MM-DD
-            const formatDate = (date) => {
-                return date.toISOString().split('T')[0];
-            };
-            
-            // Set min date based on car availability
-            let minDate = "today";
-            if (car.id === "swift2024") {
-                minDate = "2026-02-03"; // Available from Feb 3, 2026
-            }
-            
-            // Pick-up date picker
-            const pickupInput = document.getElementById(`${car.id}-pickup`);
-            if (pickupInput) {
-                flatpickr(pickupInput, {
-                    minDate: minDate,
-                    dateFormat: "Y-m-d",
-                    disable: car.blockedDates,
-                    onChange: function(selectedDates) {
-                        const returnInput = document.getElementById(`${car.id}-return`);
-                        const returnPicker = returnInput._flatpickr;
-                        if (selectedDates[0] && returnPicker) {
-                            const nextDay = new Date(selectedDates[0]);
-                            nextDay.setDate(nextDay.getDate() + 1);
-                            returnPicker.set('minDate', nextDay);
-                        }
-                        calculatePrice(car.id);
-                    }
-                });
-            }
-
-            // Return date picker
-            const returnInput = document.getElementById(`${car.id}-return`);
-            if (returnInput) {
-                flatpickr(returnInput, {
-                    minDate: minDate,
-                    dateFormat: "Y-m-d",
-                    disable: car.blockedDates,
-                    onChange: function() {
-                        calculatePrice(car.id);
-                    }
-                });
-            }
-        }
-
-        // ===== PROMO CODE FUNCTIONS =====
-        function applyPromoCode(carId) {
-            const input = document.getElementById(`promo-${carId}`);
-            const message = document.getElementById(`promo-message-${carId}`);
-            const promoCode = input.value.trim();
-            
-            if (!promoCode) {
-                message.textContent = "Please enter a promo code";
-                message.className = "promo-message promo-error";
-                return;
-            }
-            
-            if (promoCode.toLowerCase() === CONFIG.promoCode.toLowerCase()) {
-                fleetState.promoCodeValid[carId] = true;
-                fleetState.appliedPromoCodes[carId] = promoCode;
-                message.textContent = "Promo code applied successfully! 5% discount added.";
-                message.className = "promo-message promo-success";
-                showToast("Promo code applied! 5% discount added.", "success");
-                calculatePrice(carId);
-            } else {
-                fleetState.promoCodeValid[carId] = false;
-                message.textContent = "Invalid promo code";
-                message.className = "promo-message promo-error";
-                showToast("Invalid promo code", "error");
-                calculatePrice(carId);
-            }
-        }
-
-        // ===== PRICE CALCULATION =====
         function calculatePrice(carId) {
-            const car = fleetState.cars.find(c => c.id === carId);
-            if (!car || car.availability !== 'available') return;
-
-            const pickupInput = document.getElementById(`${carId}-pickup`);
-            const returnInput = document.getElementById(`${carId}-return`);
-            
-            if (!pickupInput || !returnInput) return;
-            
-            const pickup = pickupInput.value;
-            const ret = returnInput.value;
-            
-            if (!pickup || !ret) {
-                const calculator = document.getElementById(`calculator-${carId}`);
-                if (calculator) calculator.classList.remove('visible');
-                return;
-            }
-
-            const pickupDate = new Date(pickup);
-            const returnDate = new Date(ret);
-            
-            if (returnDate <= pickupDate) {
-                const calculator = document.getElementById(`calculator-${carId}`);
-                if (calculator) calculator.classList.remove('visible');
-                return;
-            }
-
-            const days = Math.ceil((returnDate - pickupDate) / (1000 * 3600 * 24));
-            const subtotal = car.dailyRate * days;
-
-            // Calculate long-term discount
-            let discountPercent = 0;
-            let discountAmount = 0;
-            for (const discount of CONFIG.discounts) {
-                if (days >= discount.days) {
-                    discountPercent = discount.percent;
-                    discountAmount = Math.round(subtotal * discountPercent / 100);
-                    break;
-                }
-            }
-
-            let total = subtotal - discountAmount;
-            let promoDiscount = 0;
-            
-            // Apply promo code discount if valid
-            if (fleetState.promoCodeValid[carId]) {
-                promoDiscount = Math.round(total * CONFIG.promoDiscount / 100);
-                total -= promoDiscount;
-            }
-
-            // Update UI
-            const daysElement = document.getElementById(`${carId}-days`);
-            const subtotalElement = document.getElementById(`${carId}-subtotal`);
-            const discountRow = document.getElementById(`${carId}-discount-row`);
-            const discountValue = document.getElementById(`${carId}-discount`);
-            const promoRow = document.getElementById(`${carId}-promo-row`);
-            const promoDiscountValue = document.getElementById(`${carId}-promo-discount`);
-            const totalElement = document.getElementById(`${carId}-total`);
-            const calculator = document.getElementById(`calculator-${carId}`);
-            
-            if (daysElement) daysElement.textContent = days;
-            if (subtotalElement) subtotalElement.textContent = `${CONFIG.currency} ${subtotal.toLocaleString()}`;
-            
-            // Show/hide discount rows
-            if (discountRow && discountValue) {
-                if (discountAmount > 0) {
-                    discountRow.style.display = 'flex';
-                    discountValue.textContent = `${CONFIG.currency} ${discountAmount.toLocaleString()}`;
-                } else {
-                    discountRow.style.display = 'none';
-                }
-            }
-            
-            if (promoRow && promoDiscountValue) {
-                if (promoDiscount > 0) {
-                    promoRow.style.display = 'flex';
-                    promoDiscountValue.textContent = `${CONFIG.currency} ${promoDiscount.toLocaleString()}`;
-                } else {
-                    promoRow.style.display = 'none';
-                }
-            }
-            
-            if (totalElement) totalElement.textContent = `${CONFIG.currency} ${total.toLocaleString()}`;
-            
-            // Show calculator
-            if (calculator) {
-                calculator.classList.add('visible');
-            }
-            
-            return { car, days, total, pickup, ret, discountPercent, discountAmount, promoDiscount };
-        }
-
-        // ===== BOOKING FUNCTIONS =====
-        function bookCar(carId) {
-            const bookingDetails = calculatePrice(carId);
-            if (!bookingDetails) {
-                showToast("Please select valid dates first", "error");
-                return;
-            }
-
-            const { car, days, total, pickup, ret, discountPercent, discountAmount, promoDiscount } = bookingDetails;
-            
-            // Build booking message
-            let message = `🚗 *${CONFIG.companyName} - Booking Request*\n\n`;
-            message += `*Vehicle:* ${car.name} ${car.year}\n`;
-            message += `*Pick-up Date:* ${pickup}\n`;
-            message += `*Return Date:* ${ret}\n`;
-            message += `*Rental Days:* ${days} days\n`;
-            message += `*Daily Rate:* ${CONFIG.currency} ${car.dailyRate.toLocaleString()}\n`;
-            
-            if (discountPercent > 0) {
-                message += `*Long-term Discount (${discountPercent}%):* ${CONFIG.currency} ${discountAmount.toLocaleString()}\n`;
-            }
-            
-            if (promoDiscount > 0) {
-                message += `*Promo Discount (${CONFIG.promoDiscount}%):* ${CONFIG.currency} ${promoDiscount.toLocaleString()}\n`;
-            }
-            
-            message += `\n*Total Amount:* ${CONFIG.currency} ${total.toLocaleString()}\n\n`;
-            message += `Please confirm availability and provide booking instructions.`;
-            
-            const encodedMessage = encodeURIComponent(message);
-            window.open(`https://wa.me/${CONFIG.whatsappNumber}?text=${encodedMessage}`, '_blank');
-            
-            showToast(`Booking request sent for ${car.name}`, "success");
-        }
-
-        function bookViaWhatsApp(carId) {
-            const car = fleetState.cars.find(c => c.id === carId);
+            const car = cars.find(c => c.id === carId);
             if (!car) return;
             
-            const status = car.availability === 'available' ? 'available for booking' : 'currently booked';
+            const pickupInput = document.getElementById(`pickup-${carId}`);
+            const returnInput = document.getElementById(`return-${carId}`);
+            const priceCalculator = document.getElementById(`price-${carId}`);
             
-            let message = `🚗 *${CONFIG.companyName}*\n\n`;
-            message += `I'm interested in the ${car.name} ${car.year} (${status}).\n`;
-            message += `Please provide availability and pricing details.`;
+            if (!pickupInput || !returnInput || !priceCalculator) return;
+            
+            const pickup = pickupInput.value;
+            const returnDate = returnInput.value;
+            
+            if (!pickup || !returnDate) {
+                priceCalculator.style.display = 'none';
+                return;
+            }
+            
+            const start = new Date(pickup);
+            const end = new Date(returnDate);
+            const days = Math.ceil((end - start) / (1000 * 3600 * 24));
+            
+            if (days <= 0) {
+                priceCalculator.style.display = 'none';
+                return;
+            }
+            
+            let subtotal = car.price * days;
+            let discount = 0;
+            
+            if (days >= 15) {
+                discount = Math.round(subtotal * car.discounts[2] / 100);
+            } else if (days >= 10) {
+                discount = Math.round(subtotal * car.discounts[1] / 100);
+            } else if (days >= 5) {
+                discount = Math.round(subtotal * car.discounts[0] / 100);
+            }
+            
+            const total = subtotal - discount;
+            
+            document.getElementById(`days-${carId}`).textContent = days;
+            document.getElementById(`subtotal-${carId}`).textContent = `MUR ${subtotal}`;
+            document.getElementById(`total-${carId}`).textContent = `MUR ${total}`;
+            
+            priceCalculator.style.display = 'block';
+            
+            return { car, days, total, pickup, returnDate, discount };
+        }
+
+        function bookCar(carId) {
+            const booking = calculatePrice(carId);
+            if (!booking) {
+                alert('Please select valid dates first.');
+                return;
+            }
+            
+            const { car, days, total, pickup, returnDate, discount } = booking;
+            
+            let message = `🚗 *GO WHEELS Booking Request* 🚗\n\n`;
+            message += `*Vehicle:* ${car.name} ${car.year}\n`;
+            message += `*Pick-up Date:* ${pickup}\n`;
+            message += `*Return Date:* ${returnDate}\n`;
+            message += `*Rental Days:* ${days} days\n`;
+            message += `*Daily Rate:* MUR ${car.price}\n`;
+            
+            if (discount > 0) {
+                message += `*Long-term Discount:* MUR ${discount}\n`;
+            }
+            
+            if (car.promoCode && car.promoDiscount > 0) {
+                const promoDiscount = Math.round(total * car.promoDiscount / 100);
+                message += `*Promo Discount (${car.promoCode}):* MUR ${promoDiscount}\n`;
+                message += `*Final Total:* MUR ${total - promoDiscount}\n`;
+            } else {
+                message += `*Total Amount:* MUR ${total}\n`;
+            }
+            
+            message += `\nPlease confirm availability.`;
             
             const encodedMessage = encodeURIComponent(message);
-            window.open(`https://wa.me/${CONFIG.whatsappNumber}?text=${encodedMessage}`, '_blank');
-            
-            showToast("Opening WhatsApp chat", "info");
+            window.open(`https://wa.me/23058100935?text=${encodedMessage}`, '_blank');
         }
 
-        // ===== ADMIN PANEL FUNCTIONS =====
-        function renderAdminPanel() {
-            const grid = document.getElementById('adminGrid');
-            if (!grid) return;
+        function whatsappInquiry(carId) {
+            const car = cars.find(c => c.id === carId);
+            if (!car) return;
             
-            grid.innerHTML = '';
-            
-            fleetState.cars.forEach((car) => {
-                const card = document.createElement('div');
-                card.className = 'admin-card';
-                
-                card.innerHTML = `
-                    <div class="admin-card-header">
-                        <div class="car-name">${car.name} ${car.year}</div>
-                        <div class="car-price">${CONFIG.currency} ${car.dailyRate.toLocaleString()}</div>
-                    </div>
-                    <div class="availability-toggle">
-                        <label class="toggle-label">
-                            <input type="checkbox" id="toggle-${car.id}" ${car.availability === 'available' ? 'checked' : ''} onchange="toggleAvailability('${car.id}')">
-                            <span class="toggle-slider"></span>
-                            <span class="toggle-status ${car.availability === 'available' ? 'available-status' : 'booked-status'}">
-                                ${car.availability === 'available' ? 'Available' : 'Booked'}
-                            </span>
-                        </label>
-                    </div>
-                `;
-                
-                grid.appendChild(card);
-            });
+            const message = `Hello, I'm interested in the ${car.name} ${car.year}. Please provide more information and availability.`;
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/23058100935?text=${encodedMessage}`, '_blank');
         }
 
-        function toggleAvailability(carId) {
-            const checkbox = document.getElementById(`toggle-${carId}`);
-            const car = fleetState.cars.find(c => c.id === carId);
-            
-            if (car && checkbox) {
-                car.availability = checkbox.checked ? 'available' : 'booked';
-                saveFleetState();
-            }
+        function updateStats() {
+            const availableCars = cars.filter(car => car.status === 'available').length;
+            document.getElementById('availableCount').textContent = availableCars;
         }
-
-        function openAdminPanel() {
-            const overlay = document.getElementById('adminOverlay');
-            if (overlay) {
-                overlay.style.display = 'flex';
-            }
-            showToast("Admin panel opened", "info");
-        }
-
-        function closeAdminPanel() {
-            const overlay = document.getElementById('adminOverlay');
-            if (overlay) {
-                overlay.style.display = 'none';
-            }
-        }
-
-        // ===== TOAST NOTIFICATION =====
-        function showToast(message, type = 'info') {
-            const container = document.getElementById('toastContainer');
-            if (!container) return;
-            
-            const toast = document.createElement('div');
-            toast.className = `toast ${type}`;
-            
-            const icon = type === 'success' ? 'fa-check-circle' : 
-                        type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle';
-            
-            toast.innerHTML = `
-                <div class="toast-icon">
-                    <i class="fas ${icon}"></i>
-                </div>
-                <div class="toast-message">${message}</div>
-            `;
-            
-            container.appendChild(toast);
-            
-            // Trigger animation
-            setTimeout(() => toast.classList.add('show'), 10);
-            
-            // Remove after 3 seconds
-            setTimeout(() => {
-                toast.classList.remove('show');
-                setTimeout(() => {
-                    if (container.contains(toast)) {
-                        container.removeChild(toast);
-                    }
-                }, 300);
-            }, 3000);
-        }
-
-        // ===== MAKE FUNCTIONS GLOBALLY AVAILABLE =====
-        window.prevImage = prevImage;
-        window.nextImage = nextImage;
-        window.goToImage = goToImage;
-        window.applyPromoCode = applyPromoCode;
-        window.bookCar = bookCar;
-        window.bookViaWhatsApp = bookViaWhatsApp;
-        window.toggleAvailability = toggleAvailability;
-        window.openAdminPanel = openAdminPanel;
-        window.closeAdminPanel = closeAdminPanel;
-        window.showToast = showToast;
     </script>
 </body>
 </html>
