@@ -3,496 +3,603 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GO Wheels | Premium Car Rental Mauritius</title>
-    
+    <title>Car Rental Services by Nazia | Mauritius</title>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
-        /* ===== RESET & VARIABLES ===== */
+        /* ===== TOKENS ===== */
         :root {
-            --primary: #0a0a0f;
-            --secondary: #111827;
-            --tertiary: #1f2937;
-            --accent: #3b82f6;
-            --accent-dark: #1d4ed8;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-            --text-primary: #f9fafb;
-            --text-secondary: #9ca3af;
-            --glass: rgba(255, 255, 255, 0.05);
-            --border: rgba(255, 255, 255, 0.08);
-            --shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-            --transition: all 0.3s ease;
+            --ink: #10241f;
+            --surface: #16352c;
+            --surface-2: #1d4237;
+            --sand: #f4ede1;
+            --sand-dim: #e6dcc9;
+            --coral: #e0693c;
+            --coral-dark: #c04f28;
+            --gold: #cb9f4d;
+            --sage: #7fa593;
+            --sage-dim: #557a68;
+            --text-primary: #f7f2e7;
+            --text-secondary: #a9bcb2;
+            --danger: #d9705a;
+            --border: rgba(247, 242, 231, 0.1);
+            --shadow: 0 18px 40px rgba(6, 16, 13, 0.45);
+            --transition: all 0.3s cubic-bezier(.4,0,.2,1);
+            --font-display: 'Fraunces', serif;
+            --font-body: 'Work Sans', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            font-family: var(--font-body);
+            background: var(--ink);
             color: var(--text-primary);
             min-height: 100vh;
             line-height: 1.6;
         }
 
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+        .container { max-width: 1360px; margin: 0 auto; padding: 0 24px; }
+
+        a { color: inherit; }
+
+        ::selection { background: var(--coral); color: var(--ink); }
 
         /* ===== HEADER ===== */
         .main-header {
-            background: rgba(10, 10, 15, 0.98);
-            backdrop-filter: blur(20px);
+            background: rgba(16, 36, 31, 0.95);
+            backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--border);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: var(--shadow);
         }
 
         .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 0;
+            padding: 16px 0;
         }
 
         .logo {
             display: flex;
-            align-items: center;
-            gap: 10px;
+            flex-direction: column;
             text-decoration: none;
-            color: white;
-            font-size: 1.8rem;
-            font-weight: 800;
-            letter-spacing: -0.5px;
+            color: var(--text-primary);
+            line-height: 1.1;
         }
 
-        .logo span {
-            background: linear-gradient(135deg, var(--accent), #60a5fa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .logo .logo-name {
+            font-family: var(--font-display);
+            font-size: 1.7rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
         }
 
-        .logo i {
-            color: var(--accent);
-            font-size: 2rem;
+        .logo .logo-name span { color: var(--coral); }
+
+        .logo .logo-sub {
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-top: 4px;
         }
 
-        .header-actions {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
+        .header-actions { display: flex; gap: 12px; align-items: center; }
 
-        .header-actions a {
-            padding: 10px 20px;
-            border-radius: 8px;
-            background: linear-gradient(135deg, #25D366, #128C7E);
-            color: white;
+        .btn-pill {
+            padding: 11px 22px;
+            border-radius: 999px;
             text-decoration: none;
             display: flex;
             align-items: center;
             gap: 8px;
             font-weight: 600;
+            font-size: 0.92rem;
             transition: var(--transition);
+            border: 1px solid transparent;
+            cursor: pointer;
+            font-family: var(--font-body);
         }
 
-        .header-actions a:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        .btn-whatsapp-pill {
+            background: var(--sage);
+            color: var(--ink);
+        }
+        .btn-whatsapp-pill:hover { background: var(--sage-dim); transform: translateY(-2px); color: var(--text-primary); }
+
+        .header-email {
+            display: none;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
         }
 
-        /* ===== HERO SECTION ===== */
+        @media (min-width: 720px) {
+            .header-email { display: inline-flex; align-items: center; gap: 8px; }
+        }
+
+        /* ===== HERO ===== */
         .hero-section {
-            padding: 150px 0 80px;
-            text-align: center;
-            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.95)),
-                        url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+            padding: 168px 0 90px;
             position: relative;
             overflow: hidden;
+            background:
+                linear-gradient(180deg, rgba(16,36,31,0.55) 0%, rgba(16,36,31,0.94) 78%, var(--ink) 100%),
+                url('https://images.unsplash.com/photo-1502877338535-766e1452684a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1800&q=80');
+            background-size: cover;
+            background-position: center 65%;
         }
 
-        .hero-section::before {
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 50px;
+            align-items: end;
+        }
+
+        .eyebrow {
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .eyebrow::before {
             content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, transparent, rgba(59, 130, 246, 0.1), transparent);
-            animation: shimmer 3s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
+            width: 28px; height: 1px;
+            background: var(--gold);
         }
 
         .hero-title {
-            font-size: 3.5rem;
-            font-weight: 900;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, #ffffff, var(--accent), #60a5fa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -1px;
+            font-family: var(--font-display);
+            font-size: clamp(2.4rem, 5vw, 3.9rem);
+            font-weight: 600;
+            line-height: 1.06;
+            letter-spacing: -0.5px;
+            margin-bottom: 22px;
+            color: var(--text-primary);
+        }
+        .hero-title em {
+            font-style: italic;
+            font-weight: 500;
+            color: var(--coral);
         }
 
         .hero-subtitle {
-            font-size: 1.3rem;
+            font-size: 1.12rem;
             color: var(--text-secondary);
-            max-width: 800px;
-            margin: 0 auto 40px;
-            font-weight: 300;
-            line-height: 1.8;
+            max-width: 540px;
+            font-weight: 400;
+            margin-bottom: 32px;
         }
 
-        .hero-stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            max-width: 1000px;
-            margin: 60px auto 0;
-        }
+        .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; }
 
-        .stat-item {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 25px;
-            border-radius: 16px;
-            border: 1px solid var(--border);
-            text-align: center;
-            backdrop-filter: blur(10px);
+        .btn-solid {
+            background: var(--coral);
+            color: var(--ink);
+            padding: 15px 28px;
+            border-radius: 999px;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
             transition: var(--transition);
+            border: none;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
         }
+        .btn-solid:hover { background: var(--coral-dark); transform: translateY(-2px); }
 
-        .stat-item:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.1);
-            border-color: var(--accent);
+        .btn-outline {
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 15px 28px;
+            border-radius: 999px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition);
+            font-size: 0.95rem;
         }
+        .btn-outline:hover { border-color: var(--sand-dim); background: rgba(255,255,255,0.04); }
 
-        .stat-value {
-            font-size: 2.5rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--accent), #60a5fa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 10px;
+        /* Boarding-pass style stat stub */
+        .stat-stub {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 28px 26px;
+            box-shadow: var(--shadow);
+            position: relative;
         }
-
-        .stat-label {
-            font-size: 1rem;
+        .stat-stub-title {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
             color: var(--text-secondary);
-            font-weight: 500;
+            margin-bottom: 18px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .stat-rows { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 16px; }
+        .stat-row-item { }
+        .stat-row-value {
+            font-family: var(--font-display);
+            font-size: 1.9rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .stat-row-value.accent { color: var(--coral); }
+        .stat-row-label {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+        .stub-perf {
+            border-top: 2px dashed var(--border);
+            margin: 22px -26px 0;
+            position: relative;
+        }
+        .stub-perf::before, .stub-perf::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            width: 20px; height: 20px;
+            border-radius: 50%;
+            background: var(--hero-punch, var(--ink));
+        }
+        .stub-perf::before { left: -10px; }
+        .stub-perf::after { right: -10px; }
+        .stub-foot {
+            padding-top: 18px;
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            color: var(--sage);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        /* ===== FLEET SECTION ===== */
-        .fleet-section {
-            padding: 80px 0;
-        }
+        /* ===== SECTION HEADERS ===== */
+        .fleet-section { padding: 90px 0; }
 
         .section-header {
-            text-align: center;
-            margin-bottom: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 30px;
+            margin-bottom: 46px;
+            flex-wrap: wrap;
         }
 
         .section-title {
-            font-size: 3rem;
-            margin-bottom: 15px;
-            background: linear-gradient(135deg, #ffffff, var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 800;
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 3.4vw, 2.7rem);
+            font-weight: 600;
+            color: var(--text-primary);
+            max-width: 560px;
         }
-
         .section-subtitle {
             color: var(--text-secondary);
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin: 0 auto;
+            font-size: 1.02rem;
+            max-width: 460px;
         }
 
-        /* ===== CAR GRID ===== */
+        /* ===== FILTERS ===== */
+        .filters { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 40px; }
+
+        .filter-btn {
+            padding: 10px 20px;
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            font-size: 0.88rem;
+            font-family: var(--font-body);
+        }
+        .filter-btn.active { background: var(--coral); color: var(--ink); border-color: var(--coral); }
+        .filter-btn:hover:not(.active) { border-color: var(--sand-dim); color: var(--text-primary); }
+
+        /* ===== FLEET GRID / TICKET CARDS ===== */
         .car-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: 32px;
         }
 
-        /* ===== CAR CARD ===== */
         .car-card {
-            background: var(--secondary);
+            background: var(--surface);
             border-radius: 20px;
-            overflow: hidden;
             border: 1px solid var(--border);
             transition: var(--transition);
             box-shadow: var(--shadow);
             position: relative;
+            overflow: visible;
         }
-
-        .car-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-        }
+        .car-card:hover { transform: translateY(-6px); border-color: rgba(224,105,60,0.4); }
 
         .car-card.popular::before {
-            content: '🔥 POPULAR';
+            content: 'MOST BOOKED';
             position: absolute;
-            top: 15px;
-            right: 15px;
-            background: linear-gradient(135deg, var(--warning), #fbbf24);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.8rem;
+            top: 18px;
+            right: -8px;
+            background: var(--gold);
+            color: var(--ink);
+            padding: 6px 14px 6px 18px;
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
             font-weight: 700;
-            z-index: 2;
+            letter-spacing: 1px;
+            z-index: 3;
+            box-shadow: -3px 3px 0 rgba(0,0,0,0.15);
         }
 
         .car-image {
             height: 220px;
             overflow: hidden;
             position: relative;
+            border-radius: 20px 20px 0 0;
         }
-
         .car-image img {
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: transform 0.6s ease;
         }
+        .car-card:hover .car-image img { transform: scale(1.06); }
 
-        .car-card:hover .car-image img {
-            transform: scale(1.05);
-        }
-
-        .car-status {
+        .car-stamp {
             position: absolute;
-            top: 15px;
-            left: 15px;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
+            top: 16px;
+            left: 16px;
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
+            transform: rotate(-3deg);
+            border: 1px dashed rgba(255,255,255,0.6);
+            backdrop-filter: blur(4px);
         }
-
-        .status-available {
-            background: linear-gradient(135deg, var(--success), #34d399);
-            color: white;
-        }
-
-        .status-booked {
-            background: linear-gradient(135deg, var(--danger), #f87171);
-            color: white;
-        }
+        .status-available { background: rgba(127,165,147,0.9); color: var(--ink); }
+        .status-booked { background: rgba(217,112,90,0.92); color: var(--ink); }
 
         .car-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            padding: 25px;
-            background: var(--tertiary);
+            gap: 14px;
+            padding: 22px 26px 0;
         }
 
         .car-title h3 {
-            font-size: 1.6rem;
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 600;
             margin-bottom: 5px;
         }
 
         .car-year {
-            color: var(--accent);
+            font-family: var(--font-mono);
+            color: var(--sage);
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 0.78rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         .car-price {
-            font-size: 2.2rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--accent), #60a5fa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-family: var(--font-mono);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--coral);
+            text-align: right;
+            white-space: nowrap;
         }
-
         .car-price span {
-            font-size: 1rem;
+            display: block;
+            font-size: 0.68rem;
             color: var(--text-secondary);
             font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
-        .car-content {
-            padding: 0 25px 25px;
-        }
+        .car-content { padding: 0 26px 26px; }
 
         .car-specs {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
-            margin: 20px 0;
+            gap: 8px;
+            margin: 18px 0 6px;
         }
-
         .spec {
-            background: var(--glass);
-            padding: 8px 16px;
-            border-radius: 10px;
-            font-size: 0.9rem;
+            background: rgba(255,255,255,0.04);
+            padding: 6px 13px;
+            border-radius: 8px;
+            font-size: 0.8rem;
             border: 1px solid var(--border);
             display: flex;
             align-items: center;
             gap: 6px;
+            color: var(--text-secondary);
         }
+        .spec i { color: var(--sage); font-size: 0.75rem; }
 
-        .spec i {
-            color: var(--accent);
+        /* perforated divider - route stops */
+        .ticket-divider {
+            position: relative;
+            border-top: 2px dashed var(--border);
+            margin: 22px -26px 20px;
         }
-
-        .discount-section {
-            margin: 25px 0;
+        .ticket-divider::before, .ticket-divider::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            width: 20px; height: 20px;
+            border-radius: 50%;
+            background: var(--ink);
         }
+        .ticket-divider::before { left: -10px; }
+        .ticket-divider::after { right: -10px; }
 
         .discount-title {
             display: flex;
             align-items: center;
-            gap: 10px;
-            color: var(--accent);
-            margin-bottom: 15px;
+            gap: 9px;
+            color: var(--gold);
+            margin-bottom: 14px;
             font-weight: 600;
+            font-size: 0.85rem;
+            font-family: var(--font-mono);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .discount-tiers {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-        }
-
-        .discount-tier {
-            text-align: center;
-            padding: 12px;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0.05));
-            border-radius: 10px;
-            border: 1px solid rgba(59, 130, 246, 0.2);
-            transition: var(--transition);
-        }
-
-        .discount-tier:hover {
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(59, 130, 246, 0.15));
-            border-color: var(--accent);
-        }
-
-        .discount-days {
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: var(--accent);
-            margin-bottom: 4px;
-        }
-
-        .discount-percent {
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: var(--success);
-        }
-
-        /* REMOVED PROMO CODE VISIBLE SECTION */
-
-        .calendar-section {
-            margin: 20px 0;
-            padding-top: 20px;
-            border-top: 1px solid var(--border);
-        }
-
-        .date-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin: 15px 0;
-        }
-
-        .date-input {
+            grid-template-columns: 1fr 1fr 1fr;
             position: relative;
         }
+        .discount-tier {
+            text-align: center;
+            padding: 4px 6px;
+            position: relative;
+        }
+        .discount-tier:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: 0; top: 10%;
+            height: 80%;
+            border-right: 1px dashed var(--border);
+        }
+        .discount-days {
+            font-family: var(--font-mono);
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 3px;
+        }
+        .discount-percent {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--sage);
+        }
 
+        .calendar-section { margin: 22px 0 0; }
+        .calendar-label {
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .date-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .date-input { position: relative; }
+        .date-input span.field-label {
+            display: block;
+            font-family: var(--font-mono);
+            font-size: 0.62rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
         .date-input i {
             position: absolute;
             left: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--accent);
+            top: 39px;
+            color: var(--sage);
+            font-size: 0.85rem;
         }
-
         .date-input input {
             width: 100%;
-            padding: 14px 14px 14px 40px;
-            background: var(--tertiary);
+            padding: 13px 12px 13px 36px;
+            background: var(--surface-2);
             border: 1px solid var(--border);
             border-radius: 10px;
             color: var(--text-primary);
             cursor: pointer;
-            font-size: 0.95rem;
+            font-size: 0.88rem;
+            font-family: var(--font-mono);
             transition: var(--transition);
         }
-
         .date-input input:focus {
             outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            border-color: var(--coral);
+            box-shadow: 0 0 0 3px rgba(224,105,60,0.15);
         }
 
         .price-calculator {
-            background: var(--tertiary);
-            border-radius: 15px;
-            padding: 25px;
-            margin: 25px 0;
+            background: var(--surface-2);
+            border-radius: 14px;
+            padding: 20px 22px;
+            margin: 20px 0 0;
             border: 1px solid var(--border);
             display: none;
+            font-family: var(--font-mono);
         }
-
         .price-row {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 12px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid var(--border);
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed var(--border);
+            font-size: 0.86rem;
+            color: var(--text-secondary);
         }
-
         .price-row.total {
-            font-weight: 800;
-            font-size: 1.2rem;
+            font-weight: 700;
+            font-size: 1.05rem;
             border-bottom: none;
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 2px solid var(--border);
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
+            color: var(--text-primary);
         }
 
         .action-buttons {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-top: 25px;
+            gap: 12px;
+            margin-top: 22px;
         }
-
         .action-btn {
-            padding: 15px;
+            padding: 14px;
             border: none;
             border-radius: 12px;
             font-weight: 700;
@@ -500,217 +607,128 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 9px;
             transition: var(--transition);
-            font-size: 1rem;
+            font-size: 0.92rem;
+            font-family: var(--font-body);
         }
-
-        .action-btn:hover:not(:disabled) {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .btn-book {
-            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-            color: white;
-        }
-
-        .btn-book:hover:not(:disabled) {
-            background: linear-gradient(135deg, var(--accent-dark), var(--accent));
-            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
-        }
-
-        .btn-whatsapp {
-            background: linear-gradient(135deg, #25D366, #128C7E);
-            color: white;
-        }
-
-        .btn-whatsapp:hover:not(:disabled) {
-            background: linear-gradient(135deg, #128C7E, #25D366);
-            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
-        }
-
-        .action-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none !important;
-        }
-
-        /* ===== FILTERS ===== */
-        .filters {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            padding: 12px 25px;
-            background: var(--tertiary);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            color: var(--text-secondary);
-            cursor: pointer;
-            transition: var(--transition);
-            font-weight: 600;
-        }
-
-        .filter-btn.active {
-            background: var(--accent);
-            color: white;
-            border-color: var(--accent);
-        }
-
-        .filter-btn:hover {
-            border-color: var(--accent);
-            color: var(--text-primary);
-        }
+        .action-btn:hover:not(:disabled) { transform: translateY(-2px); }
+        .btn-book { background: var(--coral); color: var(--ink); }
+        .btn-book:hover:not(:disabled) { background: var(--coral-dark); }
+        .btn-whatsapp { background: var(--sage); color: var(--ink); }
+        .btn-whatsapp:hover:not(:disabled) { background: var(--sage-dim); color: var(--text-primary); }
+        .action-btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none !important; }
+        .action-btn.full { grid-column: 1 / -1; background: var(--surface-2); color: var(--text-secondary); border: 1px solid var(--border); }
 
         /* ===== FOOTER ===== */
         .footer {
-            background: var(--secondary);
-            padding: 60px 0 30px;
-            margin-top: 80px;
+            background: var(--surface);
+            padding: 70px 0 34px;
+            margin-top: 40px;
             border-top: 1px solid var(--border);
         }
-
         .footer-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 40px;
+            grid-template-columns: 1.3fr 1fr 1fr 1fr;
+            gap: 44px;
         }
-
         .footer-section h3 {
-            color: var(--accent);
+            font-family: var(--font-display);
+            color: var(--text-primary);
             margin-bottom: 20px;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
+            font-weight: 600;
         }
-
+        .footer-brand-sub {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 16px;
+            display: block;
+        }
         .footer-section p {
             color: var(--text-secondary);
             margin-bottom: 12px;
             display: flex;
             align-items: center;
             gap: 10px;
+            font-size: 0.92rem;
         }
-
+        .footer-section p i { color: var(--sage); width: 16px; }
         .footer-section a {
             color: var(--text-secondary);
             text-decoration: none;
             transition: var(--transition);
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
+            font-size: 0.92rem;
         }
+        .footer-section a:hover { color: var(--coral); transform: translateX(4px); }
 
-        .footer-section a:hover {
-            color: var(--accent);
-            transform: translateX(5px);
-        }
-
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
+        .social-links { display: flex; gap: 12px; margin-top: 22px; }
         .social-link {
-            width: 45px;
-            height: 45px;
+            width: 42px; height: 42px;
             border-radius: 50%;
-            background: var(--tertiary);
+            background: var(--surface-2);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
+            color: var(--text-primary);
             text-decoration: none;
             transition: var(--transition);
             border: 1px solid var(--border);
         }
-
-        .social-link:hover {
-            background: var(--accent);
-            transform: translateY(-3px);
-            border-color: var(--accent);
-        }
+        .social-link:hover { background: var(--coral); border-color: var(--coral); color: var(--ink); transform: translateY(-3px); }
 
         .copyright {
             text-align: center;
-            margin-top: 50px;
-            padding-top: 25px;
+            margin-top: 54px;
+            padding-top: 26px;
             border-top: 1px solid var(--border);
             color: var(--text-secondary);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            font-family: var(--font-mono);
         }
+
+        /* ===== EMPTY STATE ===== */
+        .empty-state {
+            grid-column: 1/-1;
+            text-align: center;
+            padding: 70px 30px;
+            background: var(--surface);
+            border-radius: 18px;
+            border: 1px dashed var(--border);
+        }
+        .empty-state i { font-size: 2.4rem; color: var(--sage); margin-bottom: 18px; }
+        .empty-state h3 { font-family: var(--font-display); margin-bottom: 8px; font-size: 1.4rem; }
+        .empty-state p { color: var(--text-secondary); }
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 1024px) {
-            .hero-title {
-                font-size: 2.8rem;
-            }
-            
-            .section-title {
-                font-size: 2.5rem;
-            }
-            
-            .car-grid {
-                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            }
+            .hero-grid { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: 1fr 1fr; }
         }
-
         @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2.2rem;
-            }
-            
-            .hero-subtitle {
-                font-size: 1.1rem;
-            }
-            
-            .hero-stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
-            
-            .car-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .action-buttons {
-                grid-template-columns: 1fr;
-            }
-            
-            .date-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .discount-tiers {
-                grid-template-columns: 1fr;
-                gap: 8px;
-            }
+            .hero-section { padding: 150px 0 60px; }
+            .footer-content { grid-template-columns: 1fr; }
+            .action-buttons { grid-template-columns: 1fr; }
+            .date-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 480px) {
+            .header-content { flex-direction: column; gap: 14px; }
+            .filters { flex-direction: column; }
+            .filter-btn { text-align: center; }
         }
 
-        @media (max-width: 480px) {
-            .hero-title {
-                font-size: 1.8rem;
-            }
-            
-            .hero-stats {
-                grid-template-columns: 1fr;
-            }
-            
-            .header-content {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .filters {
-                flex-direction: column;
-                align-items: stretch;
-            }
+        @media (prefers-reduced-motion: reduce) {
+            * { transition: none !important; animation: none !important; }
+        }
+
+        a:focus-visible, button:focus-visible, input:focus-visible {
+            outline: 2px solid var(--coral);
+            outline-offset: 2px;
         }
     </style>
 </head>
@@ -720,11 +738,12 @@
         <div class="container">
             <div class="header-content">
                 <a href="#" class="logo">
-                    <i class="fas fa-car"></i>
-                    <span>GO</span>WHEELS
+                    <span class="logo-name">NAZIA<span>.</span></span>
+                    <span class="logo-sub">Car Rental Services · Mauritius</span>
                 </a>
                 <div class="header-actions">
-                    <a href="https://wa.me/23058100935" target="_blank">
+                    <span class="header-email"><i class="fas fa-envelope"></i> nazia@superdealsmauritius.com</span>
+                    <a href="https://wa.me/23058100935" target="_blank" class="btn-pill btn-whatsapp-pill">
                         <i class="fab fa-whatsapp"></i> Book via WhatsApp
                     </a>
                 </div>
@@ -735,27 +754,46 @@
     <!-- Hero Section -->
     <section class="hero-section">
         <div class="container">
-            <h1 class="hero-title">Premium Car Rental in Mauritius</h1>
-            <p class="hero-subtitle">
-                Experience luxury mobility with our premium fleet. Competitive rates, professional service, 
-                and seamless booking process. Your journey, elevated.
-            </p>
-            <div class="hero-stats">
-                <div class="stat-item">
-                    <div class="stat-value" id="availableCount">0</div>
-                    <div class="stat-label">Available Cars</div>
+            <div class="hero-grid">
+                <div>
+                    <div class="eyebrow">Trusted island mobility, since day one</div>
+                    <h1 class="hero-title">Explore Mauritius <em>your way</em>, with a car that's ready when you are</h1>
+                    <p class="hero-subtitle">
+                        Car Rental Services by Nazia puts a well-maintained, fully-insured fleet at your
+                        fingertips — clear pricing, no hidden fees, and a real person on WhatsApp for
+                        every step of the journey.
+                    </p>
+                    <div class="hero-cta">
+                        <a href="#fleetContainer" class="btn-solid"><i class="fas fa-car-side"></i> View the Fleet</a>
+                        <a href="https://wa.me/23058100935" target="_blank" class="btn-outline"><i class="fab fa-whatsapp"></i> Speak to Nazia</a>
+                    </div>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-value">4.9★</div>
-                    <div class="stat-label">Customer Rating</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-value">24/7</div>
-                    <div class="stat-label">Support</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-value">0%</div>
-                    <div class="stat-label">Hidden Fees</div>
+
+                <div class="stat-stub" style="--hero-punch: var(--ink);">
+                    <div class="stat-stub-title">
+                        <span>Boarding Pass</span>
+                        <span>MRU · FLEET</span>
+                    </div>
+                    <div class="stat-rows">
+                        <div class="stat-row-item">
+                            <div class="stat-row-value accent" id="availableCount">0</div>
+                            <div class="stat-row-label">Cars Available</div>
+                        </div>
+                        <div class="stat-row-item">
+                            <div class="stat-row-value">4.9★</div>
+                            <div class="stat-row-label">Customer Rating</div>
+                        </div>
+                        <div class="stat-row-item">
+                            <div class="stat-row-value">24/7</div>
+                            <div class="stat-row-label">Support</div>
+                        </div>
+                        <div class="stat-row-item">
+                            <div class="stat-row-value">0%</div>
+                            <div class="stat-row-label">Hidden Fees</div>
+                        </div>
+                    </div>
+                    <div class="stub-perf"></div>
+                    <div class="stub-foot"><i class="fas fa-check-circle"></i> Every rental fully insured &amp; sanitised</div>
                 </div>
             </div>
         </div>
@@ -765,28 +803,29 @@
     <section class="fleet-section">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Our Premium Fleet</h2>
-                <p class="section-subtitle">
-                    Select from our carefully curated collection of premium vehicles. 
-                    Each car is maintained to the highest standards for your comfort and safety.
-                </p>
+                <div>
+                    <h2 class="section-title">Our Fleet</h2>
+                    <p class="section-subtitle">
+                        From city runabouts to off-road-ready SUVs — pick your dates and see the total
+                        instantly, long-term discounts included.
+                    </p>
+                </div>
             </div>
 
             <div class="filters">
                 <button class="filter-btn active" onclick="filterCars('all')">All Cars</button>
                 <button class="filter-btn" onclick="filterCars('available')">Available Now</button>
-                <button class="filter-btn" onclick="filterCars('popular')">Most Popular</button>
+                <button class="filter-btn" onclick="filterCars('popular')">Most Booked</button>
                 <button class="filter-btn" onclick="filterCars('suv')">SUVs</button>
                 <button class="filter-btn" onclick="filterCars('economy')">Economy</button>
             </div>
 
             <div id="fleetContainer" class="car-grid">
-                <!-- Cars will load here automatically -->
-                <div class="loading" id="loadingIndicator" style="text-align: center; padding: 40px; grid-column: 1/-1;">
-                    <div style="font-size: 2rem; color: var(--accent); margin-bottom: 20px;">
+                <div class="loading" id="loadingIndicator" style="text-align: center; padding: 60px; grid-column: 1/-1;">
+                    <div style="font-size: 2rem; color: var(--coral); margin-bottom: 20px;">
                         <i class="fas fa-spinner fa-spin"></i>
                     </div>
-                    <p style="color: var(--text-secondary);">Loading fleet...</p>
+                    <p style="color: var(--text-secondary); font-family: var(--font-mono); font-size: 0.85rem;">Loading fleet…</p>
                 </div>
             </div>
         </div>
@@ -797,62 +836,62 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>GO WHEELS</h3>
+                    <h3>Nazia</h3>
+                    <span class="footer-brand-sub">Car Rental Services</span>
                     <p><i class="fas fa-map-marker-alt"></i> Mauritius, Indian Ocean</p>
                     <p><i class="fas fa-phone"></i> +230 5810 0935</p>
-                    <p><i class="fas fa-envelope"></i> booking@gowheelsmu.com</p>
+                    <p><i class="fas fa-envelope"></i> nazia@superdealsmauritius.com</p>
                     <p><i class="fas fa-clock"></i> 24/7 Customer Support</p>
                     <div class="social-links">
-                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://wa.me/23058100935" class="social-link" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                        <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
+                        <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://wa.me/23058100935" class="social-link" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="mailto:nazia@superdealsmauritius.com" class="social-link" aria-label="Email"><i class="fas fa-envelope"></i></a>
                     </div>
                 </div>
-                
+
                 <div class="footer-section">
                     <h3>Quick Links</h3>
                     <a href="#fleetContainer">Browse Fleet</a>
-                    <a href="#" onclick="filterCars('available')">Available Cars</a>
-                    <a href="#">Pricing & Rates</a>
-                    <a href="#">Terms & Conditions</a>
+                    <a href="#" onclick="filterCars('available'); return false;">Available Cars</a>
+                    <a href="#">Pricing &amp; Rates</a>
+                    <a href="#">Terms &amp; Conditions</a>
                     <a href="#">Privacy Policy</a>
                 </div>
-                
+
                 <div class="footer-section">
                     <h3>Our Services</h3>
                     <a href="#">Airport Pickup</a>
                     <a href="#">Long-term Rental</a>
                     <a href="#">Corporate Fleet</a>
-                    <a href="#">Luxury Cars</a>
+                    <a href="#">Premium &amp; SUV Rentals</a>
                     <a href="#">24/7 Roadside Assistance</a>
                 </div>
-                
+
                 <div class="footer-section">
                     <h3>Business Hours</h3>
-                    <p><strong>Mon-Fri:</strong> 7:00 AM - 10:00 PM</p>
-                    <p><strong>Sat-Sun:</strong> 8:00 AM - 10:00 PM</p>
-                    <p><strong>Emergency:</strong> 24/7 Available</p>
-                    <p><strong>Airport:</strong> 24/7 Service</p>
+                    <p><strong>Mon–Fri:</strong>&nbsp;7:00 AM – 10:00 PM</p>
+                    <p><strong>Sat–Sun:</strong>&nbsp;8:00 AM – 10:00 PM</p>
+                    <p><strong>Emergency:</strong>&nbsp;24/7 Available</p>
+                    <p><strong>Airport:</strong>&nbsp;24/7 Service</p>
                 </div>
             </div>
-            
+
             <div class="copyright">
-                © 2024 GO WHEELS Mauritius. All rights reserved. | Designed for Premium Car Rental Experience
+                © 2026 Car Rental Services by Nazia, Mauritius. All rights reserved.
             </div>
         </div>
     </footer>
 
     <script>
         // ===== HIDDEN PROMO CODES SYSTEM =====
-        // Promo codes are hidden from customers but applied automatically
-        // You can change these codes anytime without affecting the display
-        
+        // Promo codes are hidden from customers but applied automatically.
+        // Change these codes/percentages any time — nothing here is shown on the page.
         const hiddenPromoCodes = {
-            "WASSIM99": 5,  // Code: WASSIM99 gives 5% discount
-            "GO2024": 10,   // Code: GO2024 gives 10% discount
-            "LOYALTY5": 5,  // Code: LOYALTY5 gives 5% discount
-            "NEWYEAR": 15   // Code: NEWYEAR gives 15% discount
+            "WASSIM99": 5,
+            "GO2024": 10,
+            "LOYALTY5": 5,
+            "NEWYEAR": 15
         };
 
         // ===== CAR DATA =====
@@ -865,13 +904,9 @@
                 status: "available",
                 category: ["popular", "economy"],
                 features: ["Automatic", "5 Seats", "Touchscreen", "Fuel Efficient", "Bluetooth", "Air Conditioning"],
-                images: [
-                    "images/naz3.jpg",
-                    "images/naz4.jpg"
-                ],
+                images: ["images/naz3.jpg", "images/naz4.jpg"],
                 discounts: [5, 10, 15],
                 popular: true,
-                // Promo code removed from here - now managed separately
                 blockedDates: []
             },
             {
@@ -882,10 +917,7 @@
                 status: "available",
                 category: ["popular", "economy"],
                 features: ["2025 Model", "Automatic", "5 Seats", "Premium Sound", "LED Lights", "Rear Camera"],
-                images: [
-                    "images/naz3.jpg",
-                    "images/naz4.jpg"
-                ],
+                images: ["images/naz3.jpg", "images/naz4.jpg"],
                 discounts: [5, 10, 15],
                 popular: true,
                 blockedDates: []
@@ -898,10 +930,7 @@
                 status: "booked",
                 category: ["economy"],
                 features: ["Automatic", "5 Seats", "Fuel Efficient", "Blue Color", "Power Windows", "FM Radio"],
-                images: [
-                    "images/naz8.jpg",
-                    "images/naz8.jpg"
-                ],
+                images: ["images/naz8.jpg", "images/naz8.jpg"],
                 discounts: [5, 10, 15],
                 popular: false,
                 blockedDates: []
@@ -914,10 +943,7 @@
                 status: "available",
                 category: ["economy"],
                 features: ["Automatic", "5 Seats", "Modern Design", "Grey Color", "USB Ports", "Power Steering"],
-                images: [
-                    "images/naz9.jpg",
-                    "images/naz9.jpg"
-                ],
+                images: ["images/naz9.jpg", "images/naz9.jpg"],
                 discounts: [5, 10, 15],
                 popular: false,
                 blockedDates: []
@@ -930,10 +956,7 @@
                 status: "available",
                 category: ["suv", "popular"],
                 features: ["SUV", "7 Seats", "Powerful", "Spacious", "4x4", "Sunroof", "Leather Seats"],
-                images: [
-                    "images/naz5.jpg",
-                    "images/naz6.jpg"
-                ],
+                images: ["images/naz5.jpg", "images/naz6.jpg"],
                 discounts: [5, 10, 15],
                 popular: true,
                 blockedDates: []
@@ -946,10 +969,7 @@
                 status: "available",
                 category: ["economy"],
                 features: ["Automatic", "5 Seats", "Fuel Efficient", "Compact", "Easy Parking", "Low Maintenance"],
-                images: [
-                    "images/naz11.jpg",
-                    "images/naz11.jpg"
-                ],
+                images: ["images/naz11.jpg", "images/naz11.jpg"],
                 discounts: [5, 7, 10],
                 popular: false,
                 blockedDates: []
@@ -962,26 +982,21 @@
                 status: "available",
                 category: ["suv", "popular"],
                 features: ["4x4", "Pickup Truck", "7 Seats", "Premium Off-road", "Turbo Diesel", "Off-road Package"],
-                images: [
-                    "images/naz12.jpg",
-                    "images/naz12.jpg"
-                ],
+                images: ["images/naz12.jpg", "images/naz12.jpg"],
                 discounts: [5, 10, 15],
                 popular: true,
                 blockedDates: []
             }
         ];
 
-        // ===== WEBSITE INITIALIZATION =====
+        // ===== INIT =====
         document.addEventListener('DOMContentLoaded', function() {
-            // Initial render with slight delay to show loading
             setTimeout(() => {
                 renderFleet(cars);
                 updateStats();
                 setTimeout(initializeDatePickers, 300);
-            }, 800);
-            
-            // Add active class to filter buttons
+            }, 700);
+
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -995,8 +1010,8 @@
         function filterCars(filter) {
             currentFilter = filter;
             let filteredCars = [...cars];
-            
-            switch(filter) {
+
+            switch (filter) {
                 case 'available':
                     filteredCars = cars.filter(car => car.status === 'available');
                     break;
@@ -1012,7 +1027,7 @@
                 default:
                     filteredCars = cars;
             }
-            
+
             renderFleet(filteredCars);
             setTimeout(initializeDatePickers, 100);
         }
@@ -1020,147 +1035,134 @@
         function renderFleet(carsArray) {
             const container = document.getElementById('fleetContainer');
             const loadingIndicator = document.getElementById('loadingIndicator');
-            
-            // Hide loading indicator
-            if (loadingIndicator) {
-                loadingIndicator.style.display = 'none';
-            }
-            
-            // Clear container
+
+            if (loadingIndicator) loadingIndicator.style.display = 'none';
+
             container.innerHTML = '';
-            
+
             if (carsArray.length === 0) {
                 container.innerHTML = `
-                    <div style="grid-column: 1/-1; text-align: center; padding: 60px; background: var(--tertiary); border-radius: 15px; border: 2px dashed var(--border);">
-                        <i class="fas fa-car" style="font-size: 3rem; color: var(--text-secondary); margin-bottom: 20px;"></i>
-                        <h3 style="color: var(--text-primary); margin-bottom: 10px;">No Cars Found</h3>
-                        <p style="color: var(--text-secondary);">Try adjusting your filter criteria</p>
+                    <div class="empty-state">
+                        <i class="fas fa-car"></i>
+                        <h3>No cars match that filter</h3>
+                        <p>Try a different category, or WhatsApp us — we may have something coming available.</p>
                     </div>
                 `;
                 return;
             }
-            
+
             carsArray.forEach(car => {
                 const card = document.createElement('div');
                 card.className = `car-card ${car.popular ? 'popular' : ''}`;
                 card.id = car.id;
-                
-                // Prepare features HTML
-                const featuresHTML = car.features.map(f => 
+
+                const featuresHTML = car.features.map(f =>
                     `<div class="spec"><i class="fas fa-check-circle"></i> ${f}</div>`
                 ).join('');
-                
-                // Prepare discount HTML
+
                 const discountHTML = `
                     <div class="discount-tiers">
                         <div class="discount-tier">
-                            <div class="discount-days">5+ Days</div>
-                            <div class="discount-percent">${car.discounts[0]}% OFF</div>
+                            <div class="discount-days">5+ days</div>
+                            <div class="discount-percent">${car.discounts[0]}% off</div>
                         </div>
                         <div class="discount-tier">
-                            <div class="discount-days">10+ Days</div>
-                            <div class="discount-percent">${car.discounts[1]}% OFF</div>
+                            <div class="discount-days">10+ days</div>
+                            <div class="discount-percent">${car.discounts[1]}% off</div>
                         </div>
                         <div class="discount-tier">
-                            <div class="discount-days">15+ Days</div>
-                            <div class="discount-percent">${car.discounts[2] || car.discounts[1]}% OFF</div>
+                            <div class="discount-days">15+ days</div>
+                            <div class="discount-percent">${car.discounts[2] || car.discounts[1]}% off</div>
                         </div>
                     </div>
                 `;
-                
-                // Card HTML structure - NO PROMO CODE DISPLAYED
+
                 card.innerHTML = `
                     <div class="car-image">
-                        <img src="${car.images[0]}" alt="${car.name} ${car.year}" 
-                             onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'">
-                        <div class="car-status ${car.status === 'available' ? 'status-available' : 'status-booked'}">
+                        <img src="${car.images[0]}" alt="${car.name} ${car.year}"
+                             onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1502877338535-766e1452684a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'">
+                        <div class="car-stamp ${car.status === 'available' ? 'status-available' : 'status-booked'}">
                             ${car.status === 'available' ? 'Available' : 'Booked'}
                         </div>
                     </div>
-                    
+
                     <div class="car-header">
                         <div class="car-title">
                             <h3>${car.name} ${car.year}</h3>
-                            <div class="car-year">Premium Category</div>
+                            <div class="car-year">Premium category</div>
                         </div>
-                        <div class="car-price">MUR ${car.price}<span>/day</span></div>
+                        <div class="car-price">MUR ${car.price}<span>/ day</span></div>
                     </div>
-                    
+
                     <div class="car-content">
-                        <div class="car-specs">
-                            ${featuresHTML}
-                        </div>
-                        
-                        <div class="discount-section">
-                            <div class="discount-title">
-                                <i class="fas fa-percentage"></i>
-                                <span>Long-term Rental Discounts</span>
-                            </div>
-                            ${discountHTML}
-                        </div>
-                        
+                        <div class="car-specs">${featuresHTML}</div>
+
+                        <div class="ticket-divider"></div>
+
+                        <div class="discount-title"><i class="fas fa-route"></i> Long-term discounts</div>
+                        ${discountHTML}
+
                         ${car.status === 'available' ? `
                             <div class="calendar-section">
-                                <div style="margin-bottom: 10px; font-weight: 600; color: var(--accent); display: flex; align-items: center; gap: 10px;">
-                                    <i class="fas fa-calendar-alt"></i>
-                                    <span>Select Rental Dates</span>
-                                </div>
+                                <div class="calendar-label"><i class="fas fa-calendar-alt"></i> Select rental dates</div>
                                 <div class="date-grid">
                                     <div class="date-input">
+                                        <span class="field-label">Pick-up</span>
                                         <i class="fas fa-calendar-plus"></i>
-                                        <input type="text" id="pickup-${car.id}" placeholder="Pick-up Date" readonly>
+                                        <input type="text" id="pickup-${car.id}" placeholder="Choose date" readonly>
                                     </div>
                                     <div class="date-input">
+                                        <span class="field-label">Return</span>
                                         <i class="fas fa-calendar-check"></i>
-                                        <input type="text" id="return-${car.id}" placeholder="Return Date" readonly>
+                                        <input type="text" id="return-${car.id}" placeholder="Choose date" readonly>
                                     </div>
                                 </div>
                             </div>
-                            
-                            <div class="price-calculator" id="price-${car.id}" style="display: none;">
+
+                            <div class="price-calculator" id="price-${car.id}">
                                 <div class="price-row">
-                                    <span>Rental Period:</span>
+                                    <span>Rental period</span>
                                     <span id="days-${car.id}">0 days</span>
                                 </div>
                                 <div class="price-row">
-                                    <span>Daily Rate:</span>
+                                    <span>Daily rate</span>
                                     <span>MUR ${car.price}</span>
                                 </div>
                                 <div class="price-row">
-                                    <span>Subtotal:</span>
+                                    <span>Subtotal</span>
                                     <span id="subtotal-${car.id}">MUR 0</span>
                                 </div>
                                 <div class="price-row" id="discount-${car.id}" style="display: none;">
-                                    <span>Long-term Discount:</span>
+                                    <span>Long-term discount</span>
                                     <span id="discount-amount-${car.id}">MUR 0</span>
                                 </div>
                                 <div class="price-row total">
-                                    <span>Total Amount:</span>
-                                    <span id="total-${car.id}" style="color: var(--accent); font-weight: 900;">MUR 0</span>
+                                    <span>Total</span>
+                                    <span id="total-${car.id}">MUR 0</span>
                                 </div>
                             </div>
-                            
+
                             <div class="action-buttons">
                                 <button class="action-btn btn-book" onclick="bookCar('${car.id}')" id="book-btn-${car.id}" disabled>
                                     <i class="fas fa-check-circle"></i> Book Now
                                 </button>
                                 <button class="action-btn btn-whatsapp" onclick="whatsappInquiry('${car.id}')">
-                                    <i class="fab fa-whatsapp"></i> WhatsApp Inquiry
+                                    <i class="fab fa-whatsapp"></i> Ask a Question
                                 </button>
                             </div>
                         ` : `
                             <div class="action-buttons">
-                                <button class="action-btn" disabled style="background: var(--tertiary);">
-                                    <i class="fas fa-times-circle"></i> Currently Booked
+                                <button class="action-btn full" disabled>
+                                    <i class="fas fa-times-circle"></i> Currently booked
                                 </button>
-                                <button class="action-btn btn-whatsapp" onclick="whatsappInquiry('${car.id}')">
+                                <button class="action-btn btn-whatsapp" style="grid-column: 1 / -1;" onclick="whatsappInquiry('${car.id}')">
                                     <i class="fab fa-whatsapp"></i> Check Availability
                                 </button>
                             </div>
                         `}
                     </div>
                 `;
-                
+
                 container.appendChild(card);
             });
         }
@@ -1170,7 +1172,7 @@
                 if (car.status === 'available') {
                     const pickupInput = document.getElementById(`pickup-${car.id}`);
                     const returnInput = document.getElementById(`return-${car.id}`);
-                    
+
                     if (pickupInput && !pickupInput._flatpickr) {
                         flatpickr(pickupInput, {
                             minDate: "today",
@@ -1187,15 +1189,13 @@
                             }
                         });
                     }
-                    
+
                     if (returnInput && !returnInput._flatpickr) {
                         flatpickr(returnInput, {
                             minDate: "today",
                             dateFormat: "Y-m-d",
                             disable: car.blockedDates,
-                            onChange: function() {
-                                calculatePrice(car.id);
-                            }
+                            onChange: function() { calculatePrice(car.id); }
                         });
                     }
                 }
@@ -1205,37 +1205,36 @@
         function calculatePrice(carId) {
             const car = cars.find(c => c.id === carId);
             if (!car) return null;
-            
+
             const pickupInput = document.getElementById(`pickup-${carId}`);
             const returnInput = document.getElementById(`return-${carId}`);
             const priceCalculator = document.getElementById(`price-${carId}`);
             const bookButton = document.getElementById(`book-btn-${carId}`);
-            
+
             if (!pickupInput || !returnInput || !priceCalculator) return null;
-            
+
             const pickup = pickupInput.value;
             const returnDate = returnInput.value;
-            
+
             if (!pickup || !returnDate) {
                 priceCalculator.style.display = 'none';
                 if (bookButton) bookButton.disabled = true;
                 return null;
             }
-            
+
             const start = new Date(pickup);
             const end = new Date(returnDate);
             const days = Math.ceil((end - start) / (1000 * 3600 * 24));
-            
+
             if (days <= 0) {
                 priceCalculator.style.display = 'none';
                 if (bookButton) bookButton.disabled = true;
                 return null;
             }
-            
+
             let subtotal = car.price * days;
-            let discount = 0;
             let discountPercent = 0;
-            
+
             if (days >= 15) {
                 discountPercent = car.discounts[2] || car.discounts[1];
             } else if (days >= 10) {
@@ -1243,83 +1242,72 @@
             } else if (days >= 5) {
                 discountPercent = car.discounts[0];
             }
-            
-            discount = Math.round(subtotal * discountPercent / 100);
+
+            const discount = Math.round(subtotal * discountPercent / 100);
             const total = subtotal - discount;
-            
-            // Update display
+
             document.getElementById(`days-${carId}`).textContent = `${days} ${days === 1 ? 'day' : 'days'}`;
             document.getElementById(`subtotal-${carId}`).textContent = `MUR ${subtotal.toLocaleString()}`;
             document.getElementById(`total-${carId}`).textContent = `MUR ${total.toLocaleString()}`;
-            
+
             if (discount > 0) {
                 document.getElementById(`discount-${carId}`).style.display = 'flex';
                 document.getElementById(`discount-amount-${carId}`).textContent = `MUR ${discount.toLocaleString()} (${discountPercent}%)`;
             } else {
                 document.getElementById(`discount-${carId}`).style.display = 'none';
             }
-            
+
             priceCalculator.style.display = 'block';
             if (bookButton) bookButton.disabled = false;
-            
+
             return { car, days, total, pickup, returnDate, discount };
         }
 
         function bookCar(carId) {
             const booking = calculatePrice(carId);
             if (!booking) {
-                alert('⚠️ Please select valid dates first.');
+                alert('Please select valid dates first.');
                 return;
             }
-            
+
             const { car, days, total, pickup, returnDate, discount } = booking;
-            
+
             // Automatically apply best available promo code (hidden from customer)
-            let appliedPromoCode = "WASSIM99"; // Default promo code
             let promoDiscount = 0;
-            
-            // Check which promo code to apply based on car or customer type
-            // This is where you can add logic to decide which promo to apply
             if (days >= 7) {
-                appliedPromoCode = "LOYALTY5";
-                promoDiscount = Math.round(total * 5 / 100);
-            } else if (car.category.includes("popular")) {
-                appliedPromoCode = "WASSIM99";
-                promoDiscount = Math.round(total * 5 / 100);
+                promoDiscount = Math.round(total * 5 / 100); // LOYALTY5
             } else {
-                appliedPromoCode = "WASSIM99";
-                promoDiscount = Math.round(total * 5 / 100);
+                promoDiscount = Math.round(total * 5 / 100); // WASSIM99
             }
-            
+
             const finalTotal = total - promoDiscount;
-            
-            // WhatsApp message WITHOUT revealing promo code
-            let message = `🚗 *GO WHEELS - Car Booking Request* 🚗\n\n`;
+
+            let message = `🚗 *Car Rental Services by Nazia — Booking Request* 🚗\n\n`;
             message += `*Vehicle:* ${car.name} ${car.year}\n`;
             message += `*Rental Period:* ${pickup} to ${returnDate} (${days} days)\n`;
             message += `*Daily Rate:* MUR ${car.price}\n`;
             message += `*Subtotal:* MUR ${(car.price * days).toLocaleString()}\n`;
-            
+
             if (discount > 0) {
                 message += `*Long-term Discount:* -MUR ${discount.toLocaleString()}\n`;
             }
-            
+
             if (promoDiscount > 0) {
                 message += `*Special Discount:* -MUR ${promoDiscount.toLocaleString()}\n`;
                 message += `*Final Total:* MUR ${finalTotal.toLocaleString()}\n`;
             } else {
                 message += `*Total Amount:* MUR ${total.toLocaleString()}\n`;
             }
-            
+
             message += `\n📋 *Customer Information:*\n`;
             message += `Name: \n`;
             message += `Phone: \n`;
             message += `Email: \n`;
             message += `Pickup Location: \n`;
             message += `Drop-off Location: \n`;
-            
+
             message += `\n✅ Please confirm availability and send booking instructions.`;
-            
+
             const encodedMessage = encodeURIComponent(message);
             window.open(`https://wa.me/23058100935?text=${encodedMessage}`, '_blank');
         }
@@ -1327,8 +1315,8 @@
         function whatsappInquiry(carId) {
             const car = cars.find(c => c.id === carId);
             if (!car) return;
-            
-            const message = `Hello GO WHEELS! 👋\n\nI'm interested in the ${car.name} ${car.year}.\n\nPlease provide:\n1. Availability for my dates\n2. More details about this vehicle\n3. Any special offers\n\nThank you!`;
+
+            const message = `Hello! I'm interested in the ${car.name} ${car.year} from Car Rental Services by Nazia.\n\nPlease let me know:\n1. Availability for my dates\n2. More details about this vehicle\n3. Any special offers\n\nThank you!`;
             const encodedMessage = encodeURIComponent(message);
             window.open(`https://wa.me/23058100935?text=${encodedMessage}`, '_blank');
         }
@@ -1340,4 +1328,3 @@
     </script>
 </body>
 </html>
-
